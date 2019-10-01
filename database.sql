@@ -524,4 +524,3 @@ CREATE TABLE [dbo].[YeuThich](
 ) ON [PRIMARY]
 
 GO
-SET IDENTITY_INSERT [dbo].[BinhLuan] ON 
