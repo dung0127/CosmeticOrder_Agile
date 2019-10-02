@@ -1,11 +1,26 @@
-﻿
+﻿@model IEnumerable<WebOnline.Models.SanPham>
 @{
-    ViewData["Title"] = "index";
+    ViewData["Title"] = "Indexleft";
     Layout = "~/Views/Shared/_Frontend.cshtml";
+    string loai = "Tất cả Sản phẩm";
+    if (ViewBag.Loai != null)
+    {
+        loai = (ViewBag.Loai as Loai).TenLoai;
+    }
 }
-
-
-
+<script>
+    function myFunction() {
+        alert("Sản phẩm tạm hết hàng!");
+    }
+</script>
+@section metasocials{
+    <meta property="fb:app_id" content="443695919745450" />
+    <meta property="og:url" content="https://obaju.azurewebsites.net/san-pham/@loai.ToUrlFriendly()" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@loai" />
+    <meta property="og:description" content="Nhà phân phối mỹ phẩm chính hãng - Luôn cập nhật xu hướng mới nhất. Sự lựa chọn hoàn hảo dành cho bạn." />
+    <meta property="og:image" content="https://obaju.azurewebsites.net/images/kinh-doanh-my-pham.jpg" />
+}
 
 <div id="content">
     <div class="container">
@@ -28,30 +43,43 @@
                     <div class="card-header">
                         <h3 class="h4 card-title"><i class="fa fa-list"></i> &nbsp;&nbsp;Danh mục</h3>
                     </div>
-
+                    @{
+                        MyPhamContext db = new MyPhamContext();
+                        var dsLoai = db.Loai
+                            .Where(p => p.MoTa == "0")
+                            .ToList();
+                        var dsLoai1 = db.Loai
+                            .Where(p => p.MoTa == "1")
+                            .ToList();
+                    }
                     <div class="card-body">
                         <ul class="nav nav-pills flex-column category-menu">
                             <li>
                                 <a class="nav-link active">Trang Điểm <span class="badge badge-light"></span></a>
                                 <ul class="list-unstyled">
-
-                                    <li class="nav-item">
-                                        <a>
-
-                                        </a>
-                                    </li>
-
+                                    @foreach (var item in dsLoai)
+                                    {
+                                        var sl1 = db.SanPham.Where(p => p.MaLoai == item.MaLoai).Count();
+                                        <li class="nav-item">
+                                            <a asp-action="Index" asp-route-loai="@item.TenLoai.ToUrlFriendly()" asp-controller="SanPham">
+                                                @item.TenLoai <span>(@sl1)</span>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </li>
                             <li>
                                 <a class="nav-link active">Chăm sóc da <span class="badge badge-light"></span></a>
                                 <ul class="list-unstyled">
-
-                                    <li class="nav-item ">
-                                        <a>
-                                        </a>
-                                    </li>
-
+                                    @foreach (var item in dsLoai1)
+                                    {
+                                        var sl2 = db.SanPham.Where(p => p.MaLoai == item.MaLoai).Count();
+                                        <li class="nav-item ">
+                                            <a asp-action="Index" asp-route-loai="@item.TenLoai.ToUrlFriendly()" asp-controller="SanPham">
+                                                @item.TenLoai <span>(@sl2)</span>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </li>
                         </ul>
@@ -86,149 +114,70 @@
                     </div>
                 </div>
                 <div class="row products">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product1.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                    @foreach (var item in Model)
+                    {
+
+                        MyPhamContext db1 = new MyPhamContext();
+                        var Sl = db1.KhoHang.Where(p => p.MaSp == item.MaSp).ToList();
+                        @foreach (var item1 in Sl)
+                        {
+                            if (item1.SoLuong == 0)
+                            {
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product">
+                                        <div class="flip-container">
+                                            <div class="flipper">
+                                                <div class="front"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
+                                                <div class="back"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh2" alt="" class="img-fluid"></a></div>
+                                            </div>
+                                        </div><a href="detail.html" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                                        <div class="text">
+                                            <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl">@item.TenSp</a></h3>
+                                            <p class="price">
+                                                <del>@item.GiaCu.Value.ToString("#,##0") đ </del> @item.DonGia.Value.ToString("#,##0") đ
+                                            </p>
+                                            <p class="buttons"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()" class="btn btn-outline-secondary">Chi tiết</a><a onclick="myFunction()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a></p>
+                                        </div>
+                                        <div class="ribbon sale">
+                                            <div class="theribbon">TẠM HẾT HÀNG</div>
+                                            <div class="ribbon-background"></div>
+                                        </div><!-- /.text-->
+                                    </div>
+                                    <!-- /.product            -->
                                 </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3><a href="detail.html">Fur coat with very but very very long name</a></h3>
-                                <p class="price">
-                                    <del></del>$143.00
-                                </p>
-                                <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                            </div>
-                            <!-- /.text-->
-                        </div>
-                        <!-- /.product            -->
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product2.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product2_2.jpg" alt="" class="img-fluid"></a></div>
+                            }
+
+                            else
+                            {
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product">
+                                        <div class="flip-container">
+                                            <div class="flipper">
+                                                <div class="front"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
+                                                <div class="back"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh2" alt="" class="img-fluid"></a></div>
+                                            </div>
+                                        </div><a href="detail.html" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                                        <div class="text">
+                                            <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-id="@item.MaSp">@item.TenSp</a></h3>
+                                            <p class="price">
+                                                <del>@item.GiaCu.Value.ToString("#,##0") đ </del> @item.DonGia.Value.ToString("#,##0") đ
+                                            </p>
+                                            <p class="buttons"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()" class="btn btn-outline-secondary">Chi tiết</a> <a asp-action="AddToCart" asp-controller="GioHang" asp-route-mahh="@item.MaSp" asp-route-sl="1" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a></p>
+                                        </div>
+                                        <!-- /.text-->
+                                    </div>
+                                    <!-- /.product            -->
                                 </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product2.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3><a href="detail.html">White Blouse Armani</a></h3>
-                                <p class="price">
-                                    <del>$280</del>$143.00
-                                </p>
-                                <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                            </div>
-                            <!-- /.text-->
-                            <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                            <div class="ribbon gift">
-                                <div class="theribbon">GIFT</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                        </div>
-                        <!-- /.product            -->
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product3.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product3_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product3.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3><a href="detail.html">Black Blouse Versace</a></h3>
-                                <p class="price">
-                                    <del></del>$143.00
-                                </p>
-                                <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                            </div>
-                            <!-- /.text-->
-                        </div>
-                        <!-- /.product            -->
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product3.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product3_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product3.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3><a href="detail.html">Black Blouse Versace</a></h3>
-                                <p class="price">
-                                    <del></del>$143.00
-                                </p>
-                                <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                            </div>
-                            <!-- /.text-->
-                        </div>
-                        <!-- /.product            -->
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product2.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product2_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product2.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3><a href="detail.html">White Blouse Versace</a></h3>
-                                <p class="price">
-                                    <del></del>$143.00
-                                </p>
-                                <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                            </div>
-                            <!-- /.text-->
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                        </div>
-                        <!-- /.product            -->
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product1.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product1_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3><a href="detail.html">Fur coat</a></h3>
-                                <p class="price">
-                                    <del></del>$143.00
-                                </p>
-                                <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                            </div>
-                            <!-- /.text-->
-                            <div class="ribbon gift">
-                                <div class="theribbon">GIFT</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                        </div>
-                        <!-- /.product            -->
-                    </div>
+                            }
+                        }
+
+                    }
                     <!-- /.products-->
                 </div>
                 <nav class="justify-content-center d-flex">
-                    <ul class="page-item"></ul>
+                    <ul class="page-item">
+                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model, @class = "page-item" })
+                    </ul>
                 </nav>
             </div>
             <!-- /.col-lg-9-->
