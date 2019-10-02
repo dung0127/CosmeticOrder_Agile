@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Frontend.cshtml";
+}
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- breadcrumb-->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Hóa đơn của bạn</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <!--
+                *** CUSTOMER MENU ***
+                _________________________________________________________
+                -->
+                <div class="card sidebar-menu">
+                    <div class="card-header">
+                        <h3 class="h4 card-title">Khách Hàng</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-pills flex-column"><a class="nav-link active"><i class="fa fa-list"></i>Hóa đơn của bạn</a><a asp-action="Index" asp-controller="YeuThich" class="nav-link"><i class="fa fa-heart"></i> Sản phẩm yêu thích</a><a asp-action="Index" asp-controller="KhachHang" class="nav-link"><i class="fa fa-user"></i>Tài khoản</a><a asp-action="DangXuat" asp-controller="DangNhap" class="nav-link"><i class="fa fa-sign-out"></i> Đăng xuất</a></ul>
+                    </div>
+                </div>
+                <!-- /.col-lg-3-->
+                <!-- *** CUSTOMER MENU END ***-->
+            </div>
+            <div id="customer-orders" class="col-lg-9">
+                <div class="box">
+                    <h1>Hóa đơn của bạn</h1>
+                    <p class="lead"></p>
+                    <p class="text-muted">Nếu bạn cần hỗ trợ, xin vui lòng <a>Liên hệ</a> với chúng tôi, Chúng tôi luôn ở đây để hỗ trợ bạn 24/7.</p>
+                    <hr>
+                    
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã hóa đơn</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Người nhận</th>
+                                        <th>Tình trạng</th>
+                                        <th>Chi tiết</th>
+                                    </tr>
+                                </thead>
+                                
+                                    <tbody>
+                                        <tr>
+                                            <th></th>
+                                            <td></td>
+                                            <td></td>
+                                            
+                                            
+                                                <td><span class="badge badge-success">Đã giao hàng</span></td>
+                                            
+                                            
+                                            <td><a class="btn btn-primary btn-sm">Xem</a></td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
