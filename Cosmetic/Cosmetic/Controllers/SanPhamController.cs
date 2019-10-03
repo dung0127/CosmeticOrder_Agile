@@ -37,6 +37,25 @@ namespace Cosmetic.Controllers
             return View(model);
         }
 
+        [Route("thuong-hieu/{hieuurl}")]
+        public async Task<IActionResult> Hieu(string hieuurl, int page = 1)
+        {
+
+            var qry = db.SanPham.AsNoTracking().OrderBy(p => p.MaSp);
+            var model = await PagingList.CreateAsync(qry, 9, page);
+            if (hieuurl != null)
+            {
+                ViewBag.Hieu = db.ThuongHieu.SingleOrDefault(p => p.TenHieuSeoUrl == hieuurl);
+                ThuongHieu qery1 = db.ThuongHieu.SingleOrDefault(p => p.TenHieuSeoUrl == hieuurl);
+                var qery = db.SanPham.Where(p => p.MaHieu == qery1.MaHieu).AsNoTracking().OrderBy(p => p.MaSp);
+
+                var md = await PagingList.CreateAsync(qery, 9, page);
+                return View(md);
+            }
+
+            return View();
+        }
+
         [Route("{loai}/{url}")]
         public IActionResult ChiTiet(string loai, string url)
         {

@@ -92,7 +92,7 @@ using Cosmetic.Models;
                     <div class=""nav flex-column flex-md-row nav-pills text-center"">");
             EndContext();
             BeginContext(815, 185, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "906fb73e7ab44874b854f7f59b52f6de", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e14711b4d02545b2a3a468d0296258b2", async() => {
                 BeginContext(921, 75, true);
                 WriteLiteral("  <i class=\"fa fa-map-marker\">                      </i>Thông tin giao hàng");
                 EndContext();
@@ -114,7 +114,7 @@ using Cosmetic.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             EndContext();
             BeginContext(1000, 165, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d2deabecf8f64a6a81c769ecc640c7ae", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4fb0f9cedcd24516b47fb326045532d3", async() => {
                 BeginContext(1103, 58, true);
                 WriteLiteral("<i class=\"fa fa-eye\">                  </i>Hóa đơn của bạn");
                 EndContext();
@@ -146,7 +146,7 @@ using Cosmetic.Models;
                     ");
             EndContext();
             BeginContext(1504, 2501, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "db4d2f384d20437896b97db120920ffd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "987b642a527847c496eb651d394b4518", async() => {
                 BeginContext(1569, 2100, true);
                 WriteLiteral(@"
                         <div class=""content py-3"">
@@ -187,7 +187,7 @@ using Cosmetic.Models;
                 WriteLiteral("tify-content-between\">\r\n                            ");
                 EndContext();
                 BeginContext(3669, 136, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "31c3a2f0756e4f73b62799547af68e93", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "033f329fa4d242fdbdf3cbad26e31c0a", async() => {
                     BeginContext(3750, 51, true);
                     WriteLiteral("<i class=\"fa fa-chevron-left\"></i>Quay lại giỏ hàng");
                     EndContext();

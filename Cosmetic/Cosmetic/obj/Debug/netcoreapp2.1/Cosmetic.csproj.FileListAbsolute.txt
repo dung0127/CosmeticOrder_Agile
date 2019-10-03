@@ -109,3 +109,9 @@ D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Cosmetic.dll
 D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Cosmetic.pdb
 D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Cosmetic.csproj.CopyComplete
 D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPham\Index.g.cshtml.cs
+D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPham\Hieu.g.cshtml.cs
+D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPhams\Index.g.cshtml.cs
+D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPhams\Details.g.cshtml.cs
+D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPhams\Create.g.cshtml.cs
+D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPhams\Edit.g.cshtml.cs
+D:\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\SanPhams\Delete.g.cshtml.cs

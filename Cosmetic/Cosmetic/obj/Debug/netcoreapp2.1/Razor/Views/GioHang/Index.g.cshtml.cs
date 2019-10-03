@@ -78,7 +78,7 @@ using Cosmetic.Models;
                     ");
             EndContext();
             BeginContext(684, 3483, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf31a3880e9947e0bc8972ceff551840", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6aa5f388b33648af851e9dec469c967b", async() => {
                 BeginContext(728, 3432, true);
                 WriteLiteral(@"
                         <h1>Giỏ Hàng</h1>
@@ -255,7 +255,7 @@ using Cosmetic.Models;
                     ");
             EndContext();
             BeginContext(9207, 419, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "53ba926f895e48198402405d970b9d18", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1b13944918d0491eb356b96c4b3f64e2", async() => {
                 BeginContext(9213, 406, true);
                 WriteLiteral(@"
                         <div class=""input-group"">
