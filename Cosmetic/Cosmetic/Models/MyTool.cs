@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace WebOnline.Models
+namespace Cosmetic.Models
 {
     public class MyTool
     {
@@ -59,4 +59,6 @@ namespace WebOnline.Models
             return tieuDe;
         }
     }
+
+
 }

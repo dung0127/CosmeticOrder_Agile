@@ -1,4 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Http
+@{
+    string loai = "Tất cả Sản phẩm";
+    if (ViewBag.Loai != null)
+    {
+        loai = (ViewBag.Loai as Loai).TenLoai;
+    }
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +17,7 @@
     <meta name="description" content="Nhà phân phối mỹ phẩm chính hãng - Luôn cập nhật xu hướng mới nhất. Sự lựa chọn hoàn hảo dành cho bạn.">
     <meta name="viewport" content="initial-scale=0.8, zoom=10%, width=device-width, target-densitydpi=high-dpi">
     <meta name="robots" content="all,follow">
+    @RenderSection("metasocials", required: false)
     <!-- Bootstrap CSS-->
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome CSS-->
@@ -35,13 +43,34 @@
     <link rel="shortcut icon" type="image/png" href="~/Hinh/favicon2.ico" />
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d527bc54cd0540012f200e0&product=' inline-share-buttons' async='async'></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146226536-1"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
+        gtag('config', 'UA-146226536-1');</script>
 </head>
+
 <body>
 
     <!-- Load Facebook SDK for JavaScript -->
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
+    <script>window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v4.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
     <!-- Your customer chat code -->
     <div class="fb-customerchat"
          attribution=setup_tool
@@ -56,6 +85,22 @@
         *** TOPBAR ***
         _________________________________________________________
         -->
+        <!--
+        <script>
+            $(function () {
+                setInterval(function () {
+                    $.ajax({
+                        url: "/Ajax/ServerTime",
+                        method: "GET",
+                        success: function (response) {
+                            $("#dongHo").html(response);
+                        }
+                    });
+                }, 1000);
+
+            });
+        </script>
+        -->
 
         <div id="top">
             <div class="container">
@@ -63,9 +108,16 @@
                     <div class="col-lg-6 offer mb-3 mb-lg-0"><span id="dongHo"></span>&nbsp;<a href="#" class="btn btn-success btn-sm">Flash sale</a><a href="#" class="ml-1">giảm ngay 35% toàn bộ sản phẩm</a></div>
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
-                           
+                            @if (Context.Session.Get<KhachHang>("TaiKhoan") != null)
+                            {
+                                KhachHang khach = Context.Session.Get<KhachHang>("TaiKhoan");
+                                <li class="list-inline-item"><a asp-controller="KhachHang">Xin chào @khach.HoTen !</a></li>
+                                <li class="list-inline-item"><a asp-action="DangXuat" asp-controller="DangNhap">Đăng xuất</a></li>
+                            }
+                            else
+                            {
                                 <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
-                            
+                            }
                             <li class="list-inline-item"><a asp-action="../KhachHangs/AddnewKhachhang">Thêm mới</a></li>
                             <li class="list-inline-item"><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
                         </ul>
@@ -119,24 +171,42 @@
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Trang điểm</h5>
                                             <ul class="list-unstyled mb-3">
-                                                
+                                                @{
+                                                    MyPhamContext db = new MyPhamContext();
+                                                    var dsLoai = db.Loai
+                                                        .Where(p => p.MoTa == "0")
+                                                        .ToList();
+                                                    var dsLoai1 = db.Loai
+                                                        .Where(p => p.MoTa == "1")
+                                                        .ToList();
+                                                    var dsLoai2 = db.LoaiBlog
+                                                        .Where(p => p.MoTa == "2")
+                                                        .ToList();
+                                                    var dsLoai3 = db.LoaiBlog
+                                                        .Where(p => p.MoTa == "3")
+                                                        .ToList();
+                                                }
+                                                @foreach (var item in dsLoai)
+                                                {
                                                     <li class="nav-item">
-                                                        <a>
-                                                           
+                                                        <a asp-action="Index" asp-route-loai="@item.TenLoai.ToUrlFriendly()" asp-controller="SanPham">
+                                                            @item.TenLoai
                                                         </a>
                                                     </li>
-                                                
+                                                }
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Chăm sóc da</h5>
                                             <ul class="list-unstyled mb-3">
-                                                
+                                                @foreach (var item in dsLoai1)
+                                                {
                                                     <li class="nav-item">
-                                                        <a>
+                                                        <a asp-action="Index" asp-route-loai="@item.TenLoai.ToUrlFriendly()" asp-controller="SanPham">
+                                                            @item.TenLoai
                                                         </a>
                                                     </li>
-                                                
+                                                }
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
@@ -157,21 +227,27 @@
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Bài viết</h5>
                                             <ul class="list-unstyled mb-3">
-                                                
+                                                @foreach (var item in dsLoai2)
+                                                {
                                                     <li class="nav-item">
-                                                        <a>
+                                                        <a asp-action="Index" asp-controller="Blog">
+                                                            @item.TenLoaiBlog
                                                         </a>
                                                     </li>
-                                                
+                                                }
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Beauty blogger</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item">
-                                                    <a>
-                                                    </a>
-                                                </li>
+                                                @foreach (var item in dsLoai3)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a asp-action="Index" asp-controller="Blog">
+                                                            @item.TenLoaiBlog
+                                                        </a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
@@ -192,33 +268,33 @@
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Shop</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a class="nav-link">Trang chủ</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Sản phẩm</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Chi tiết sản phẩm</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Trang chủ</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="SanPham" class="nav-link">Sản phẩm</a></li>
+                                                <li class="nav-item"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-id="1" class="nav-link">Chi tiết sản phẩm</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Khách hàng</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a  class="nav-link">Đăng ký/ Đăng nhập</a></li>
-                                                <li class="nav-item"><a class="nav-link">Lịch sử đặt hàng</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Sản phẩm yêu thích</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Thông tin tài khoản / Đổi mật khẩu</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="DangNhap" class="nav-link">Đăng ký/ Đăng nhập</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="HoaDon" class="nav-link">Lịch sử đặt hàng</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="YeuThich" class="nav-link">Sản phẩm yêu thích</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="KhachHang" asp-action="Index" class="nav-link">Thông tin tài khoản / Đổi mật khẩu</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Đặt hàng</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a  class="nav-link">Giỏ hảng</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Thanh toán bước 1</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Thanh toán bước 2</a></li>
+                                                <li class="nav-item"><a asp-action="index" asp-controller="GioHang" class="nav-link">Giỏ hảng</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="ThanhToan" class="nav-link">Thanh toán bước 1</a></li>
+                                                <li class="nav-item"><a asp-action="ThanhToan1" asp-controller="ThanhToan" class="nav-link">Thanh toán bước 2</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Liên hệ</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a  class="nav-link">Góp ý</a></li>
-                                                <li class="nav-item"><a  class="nav-link">Hỏi đáp</a></li>
+                                                <li class="nav-item"><a asp-action="Contact" asp-controller="Home" class="nav-link">Góp ý</a></li>
+                                                <li class="nav-item"><a asp-action="About" asp-controller="Home" class="nav-link">Hỏi đáp</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -229,10 +305,22 @@
                     <div class="navbar-buttons d-flex justify-content-end">
                         <!-- /.nav-collapse-->
                         <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
-                      
-                         
+                        @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
+                        {
+                            List<CartItem> GioHang = Context.Session.Get<List<CartItem>>("GioHang");
+                            int dem = 0;
+                            @foreach (var item in GioHang)
+                            {
+                                dem = dem + item.SoLuong;
+                            }
+                            <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a asp-action="index" asp-controller="GioHang" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>@dem sản phẩm</span></a></div>
+
+
+                        }
+                        else
+                        {
                             <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a asp-action="index" asp-controller="GioHang" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>0 sản phẩm</span></a></div>
-                        
+                        }
                     </div>
                 </div>
             </div>
@@ -303,6 +391,7 @@
                     <!-- Begin Mailchimp Signup Form -->
                     <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
                     <style type="text/css">
+
                         #mc_embed_signup {
                             background: #fff;
                             clear: left;
@@ -347,7 +436,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mb-2 mb-lg-0">
-                    <p class="text-center text-lg-left">©2019 Team 10, made with love for a better web </p>
+                    <p class="text-center text-lg-left">©2018 Team 23, made with love for a better web </p>
                 </div>
                 <div class="col-lg-6">
                     <p class="text-center text-lg-right">
@@ -369,5 +458,18 @@
     <script src="~/js/owl.carousel2.thumbs.js"></script>
     <script src="~/js/front.js"></script>
     <script src="~/js/site.js"></script>
+    <!-- Subiz -->
+    <script>(function (s, u, b, i, z) {
+            u[i] = u[i] || function () {
+                u[i].t = +new Date();
+                (u[i].q = u[i].q || []).push(arguments);
+            };
+            z = s.createElement('script');
+            var zz = s.getElementsByTagName('script')[0];
+            z.async = 1; z.src = b; z.id = 'subiz-script';
+            zz.parentNode.insertBefore(z, zz);
+        })(document, window, 'https://widgetv4.subiz.com/static/js/app.js', 'subiz');
+        subiz('setAccount', 'acqknxhqfwngalhwoiwc');</script>
+    <!-- End Subiz -->
 </body>
 </html>

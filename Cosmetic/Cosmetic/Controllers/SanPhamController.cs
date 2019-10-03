@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
-using WebOnline.Models;
+using Cosmetic.Models;
 
-namespace WebOnline.Controllers
+namespace Cosmetic.Controllers
 {
     public class SanPhamController : Controller
     {
@@ -35,6 +35,21 @@ namespace WebOnline.Controllers
             }
 
             return View(model);
+        }
+
+        [Route("{loai}/{url}")]
+        public IActionResult ChiTiet(string loai, string url)
+        {
+            if (loai != null)
+            {
+                ViewBag.Loai = db.Loai.SingleOrDefault(p => p.TenLoaiSeoUrl == loai);
+            }
+            SanPham hh = db.SanPham.SingleOrDefault(p => p.TenSpSeoUrl == url);
+            if (hh == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(hh);
         }
     }
 }
