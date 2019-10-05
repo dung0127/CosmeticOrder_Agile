@@ -1,6 +1,12 @@
-﻿@{
-    ViewData["Title"] = "View";
+﻿@model List<Cosmetic.Models.CartItem>
+@{
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Frontend.cshtml";
+    string loai = "Tất cả Sản phẩm";
+    if (ViewBag.Loai != null)
+    {
+        loai = (ViewBag.Loai as Loai).TenLoai;
+    }
 }
 
 <div id="content">
@@ -10,148 +16,136 @@
                 <!-- breadcrumb-->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li aria-current="page" class="breadcrumb-item active">Shopping cart</li>
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Giỏ hàng</li>
                     </ol>
                 </nav>
             </div>
+
             <div id="basket" class="col-lg-9">
                 <div class="box">
-                    <form method="post" action="checkout1.html">
-                        <h1>Giỏ Hàng</h1>
-                        <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                    <h1>Giỏ Hàng</h1>
+                    @{
+                        double tongtien = 0;
+                    }
+
+                    @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
+                    {
+                        List<CartItem> GioHang = Context.Session.Get<List<CartItem>>("GioHang");
+                        int dem = 0;
+                        @foreach (var item in GioHang)
+                        {
+                            dem = dem + item.SoLuong;
+                        }
+                        <p class="text-muted">Bạn có @dem sản phẩm trong giỏ hàng.</p>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Product</th>
-                                        <th>Quantity</th>
-                                        <th>Unit price</th>
-                                        <th>Discount</th>
-                                        <th colspan="2">Total</th>
+                                        <th colspan="2">Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th colspan="2">Tổng cộng</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="#"><img src="img/detailsquare.jpg" alt="White Blouse Armani"></a></td>
-                                        <td><a href="#">White Blouse Armani</a></td>
-                                        <td>
-                                            <input type="number" value="2" class="form-control">
-                                        </td>
-                                        <td>$123.00</td>
-                                        <td>$0.00</td>
-                                        <td>$246.00</td>
-                                        <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#"><img src="img/basketsquare.jpg" alt="Black Blouse Armani"></a></td>
-                                        <td><a href="#">Black Blouse Armani</a></td>
-                                        <td>
-                                            <input type="number" value="1" class="form-control">
-                                        </td>
-                                        <td>$200.00</td>
-                                        <td>$0.00</td>
-                                        <td>$200.00</td>
-                                        <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    </tr>
-                                </tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <form asp-action="Update" asp-controller="GioHang" method="post">
+                                        <tbody>
+                                            <tr>
+                                                <input type="hidden" name="masua" value="@item.MaHh" />
+                                                <td><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()"><img src="~/Hinh/beauty/@item.Hinh" alt=""></a></td>
+                                                <td><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()">@item.TenHh</a></td>
+                                                <td>
+                                                    <input type="number" name="sl" value="@item.SoLuong" min="1" class="form-control">
+                                                </td>
+                                                <td>@item.GiaBan.ToString("#,##0") đ</td>
+                                                <td>@item.ThanhTien.ToString("#,##0") đ</td>
+                                                <td><button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i></button></td>
+                                                <td><a class="btn btn-outline-secondary" asp-action="Remove" asp-controller="GioHang" asp-route-maxoa="@item.MaHh">&nbsp;x&nbsp;</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </form>
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    tongtien = tongtien + item.ThanhTien;
+                                }
                                 <tfoot>
                                     <tr>
-                                        <th colspan="5">Total</th>
-                                        <th colspan="2">$446.00</th>
+                                        <th colspan="5">Tổng cộng</th>
+                                        <th colspan="2">@tongtien.ToString("#,##0") đ</th>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
-                        <!-- /.table-responsive-->
-                        <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-                            <div class="left"><a href="category.html" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
-                            <div class="right">
-                                <button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update cart</button>
-                                <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i></button>
-                            </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Bạn có 0 sản phẩm trong giỏ hàng.</p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th colspan="2">Tổng cộng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <form asp-action="Update" asp-controller="GioHang" method="post">
+                                        <tr style="text-align:center">
+                                            <td colspan="6"><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chưa có sản phẩm nào trong giỏ hàng<br /><br /><br /></td>
+                                        </tr>
+                                    </form>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5">Tổng cộng</th>
+                                        <th colspan="2">0 đ</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                    </form>
+                    }
+                    <!-- /.table-responsive-->
+                    <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                        <div class="left"><a asp-action="Index" asp-controller="SanPham" asp-route-id="1" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a></div>
+                        <div class="right">
+                            <a class="btn btn-outline-secondary" asp-action="Delete" asp-controller="GioHang" onclick="return confirm('Bạn có chắc chắn muốn xóa hết giỏ hàng?')"><i class="fa fa-trash-o"></i>Xóa giỏ hàng</a>
+                            <a asp-action="Index" asp-controller="ThanhToan"><button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button></a>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box-->
-                <div class="row same-height-row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="box same-height">
-                            <h3>You may also like these products</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="product same-height">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product2.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product2_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product2.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3>Fur coat</h3>
-                                <p class="price">$143</p>
-                            </div>
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="product same-height">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product1.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product1_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3>Fur coat</h3>
-                                <p class="price">$143</p>
-                            </div>
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="product same-height">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front"><a href="detail.html"><img src="img/product3.jpg" alt="" class="img-fluid"></a></div>
-                                    <div class="back"><a href="detail.html"><img src="img/product3_2.jpg" alt="" class="img-fluid"></a></div>
-                                </div>
-                            </div><a href="detail.html" class="invisible"><img src="img/product3.jpg" alt="" class="img-fluid"></a>
-                            <div class="text">
-                                <h3>Fur coat</h3>
-                                <p class="price">$143</p>
-                            </div>
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                </div>
+
             </div>
             <!-- /.col-lg-9-->
             <div class="col-lg-3">
                 <div id="order-summary" class="box">
-                    <div class="box-header">
-                        <h3 class="mb-0">Order summary</h3>
+                    <div class="box-header" style="text-align:center">
+                        <h3 class="mb-0">Thông tin hóa đơn</h3>
                     </div>
-                    <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Order subtotal</td>
-                                    <th>$446.00</th>
+                                    <td>Tổng tiền giỏ hàng</td>
+                                    <th>@tongtien.ToString("#,##0") đ</th>
                                 </tr>
                                 <tr>
-                                    <td>Shipping and handling</td>
-                                    <th>$10.00</th>
+                                    <td>Phí giao hàng</td>
+                                    <th>Miễn phí</th>
                                 </tr>
                                 <tr>
-                                    <td>Tax</td>
-                                    <th>$0.00</th>
+                                    <td>Khuyến mãi</td>
+                                    <th>0 </th>
                                 </tr>
                                 <tr class="total">
-                                    <td>Total</td>
-                                    <th>$456.00</th>
+                                    <td>Tổng cộng</td>
+                                    <th>@tongtien.ToString("#,##0") đ</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -159,9 +153,9 @@
                 </div>
                 <div class="box">
                     <div class="box-header">
-                        <h4 class="mb-0">Coupon code</h4>
+                        <h4 class="mb-0">Mã khuyến mãi</h4>
                     </div>
-                    <p class="text-muted">If you have a coupon code, please enter it in the box below.</p>
+                    <p class="text-muted">Nhập mã khuyến mãi để nhận giá ưu đãi!</p>
                     <form>
                         <div class="input-group">
                             <input type="text" class="form-control"><span class="input-group-append">
