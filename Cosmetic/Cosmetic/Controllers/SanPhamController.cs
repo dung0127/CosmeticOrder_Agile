@@ -70,5 +70,30 @@ namespace Cosmetic.Controllers
             }
             return View(hh);
         }
+        
+        public IActionResult timKiem()
+        {
+            return View();
+        }
+        public IActionResult timSp()
+        {
+            string key = Request.Form["keysearch"].ToString();
+            var sanPham = (from sp in db.SanPham
+                           where sp.TenSp.Contains(key) && key != ""
+                           select new SanPham
+                           {
+                               MaSp = sp.MaSp,
+                               TenSp = sp.TenSp,
+                               TenAlias = sp.TenAlias,
+                               MaLoai = sp.MaLoai,
+                               MoTa = sp.MoTa,
+                               DonGia = sp.DonGia,
+                               Hinh = sp.Hinh,
+                               GiaCu = sp.GiaCu,
+                               MaNcc = sp.MaNcc,
+                               MaHieu = sp.MaHieu
+                           }).ToList();
+            return View(sanPham);
+        }
     }
 }
