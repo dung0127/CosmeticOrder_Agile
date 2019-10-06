@@ -60,6 +60,7 @@
                                                 <td>
                                                     <input type="number" name="sl" value="@item.SoLuong" min="1" class="form-control">
                                                 </td>
+
                                                 <td>@item.GiaBan.ToString("#,##0") đ</td>
                                                 <td>@item.ThanhTien.ToString("#,##0") đ</td>
                                                 <td><button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i></button></td>
@@ -75,7 +76,7 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="5">Tổng cộng</th>
-                                        <th colspan="2">@tongtien.ToString("#,##0") đ</th>
+                                        <th colspan="2"> @tongtien.ToString("#,##0") đ</th>
                                     </tr>
                                 </tfoot>
                             </table>

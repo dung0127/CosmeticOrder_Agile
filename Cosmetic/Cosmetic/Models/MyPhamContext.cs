@@ -42,7 +42,7 @@ namespace Cosmetic.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server =DESKTOP-595V239\\SQL; Database = MyPham; Integrated Security = True;");
+                optionsBuilder.UseSqlServer("Server =.; Database = MyPham; Integrated Security = True;");
             }
         }
 
