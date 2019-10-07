@@ -43,7 +43,15 @@ namespace Cosmetic
                 options.HtmlIndicatorDown = " <span>&darr;</span>";
                 options.HtmlIndicatorUp = " <span>&uarr;</span>";
             });
-            services.AddDbContext<MyPhamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebMyPham")));
+
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //Sử dụng PostgreSQL Entity Framework Core
+            services.AddEntityFrameworkNpgsql().AddDbContext<MyPhamContext>(options => options.UseNpgsql(Configuration.GetConnectionString("WebMyPham")));
+            
+            //Sử dụng Microsoft SQL Server
+            //services.AddDbContext<MyPhamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebMyPham")));
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            
             //services.AddSingleton<IPayPalPayment, PayPalPayment>();
 
             //services.Configure<PayPalAuthOptions>(Configuration.GetSection("PayPalPayment"));

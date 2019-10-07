@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace Cosmetic.Models
 {
@@ -36,13 +37,34 @@ namespace Cosmetic.Models
         public virtual DbSet<TrangThai> TrangThai { get; set; }
         public virtual DbSet<TrangWeb> TrangWeb { get; set; }
         public virtual DbSet<YeuThich> YeuThich { get; set; }
-        public virtual DbSet<LienHe> LienHe { get; set; }
-
+        public virtual DbSet<LienHe> LienHe { get; set; }     
+            
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server =.; Database = MyPham; Integrated Security = True;");
+                
+                string projectPath = AppDomain.CurrentDomain.BaseDirectory
+                .Split(new String[] { 
+                    //Nếu dùng windows sửa @"bin/" thành @"bin\
+                    //Nếu dùng Linux sửa @"bin\ thành @"bin/ 
+                    @"bin/"                
+                    }, StringSplitOptions.None)[0];
+                
+                //Chỉ cần thay đổi connectionstring tại appsettings.json
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(projectPath)
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+                string connectionString = configuration.GetConnectionString("WebMyPham");
+                /////////////////////////////////////////////////////////////////////////
+                //Sử dụng PostgreSQL Entity Framework Core
+                optionsBuilder.UseNpgsql(connectionString);
+                
+                //Sử dụng Microsoft SQL Server
+                //optionsBuilder.UseSqlServer(connectionString);
+                //////////////////////////////////////////////////////////////////////////
             }
         }
 
@@ -67,7 +89,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
-                entity.Property(e => e.NgayGui).HasColumnType("datetime");
+                entity.Property(e => e.NgayGui).HasColumnType("timestamp");
 
                 entity.HasOne(d => d.MaKhNavigation)
                     .WithMany(p => p.BanBe)
@@ -96,14 +118,14 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.NgayGy)
                     .HasColumnName("NgayGY")
-                    .HasColumnType("datetime");
+                    .HasColumnType("timestamp");
             });
 
             modelBuilder.Entity<Blog>(entity =>
             {
                 entity.HasKey(e => e.MaBlog);
 
-                entity.Property(e => e.NgayDang).HasColumnType("datetime");
+                entity.Property(e => e.NgayDang).HasColumnType("timestamp");
 
                 entity.Property(e => e.TenBlog).HasMaxLength(50);
 
@@ -131,7 +153,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.NgayBl)
                     .HasColumnName("NgayBL")
-                    .HasColumnType("datetime");
+                    .HasColumnType("timestamp");
 
                 entity.HasOne(d => d.MaKhNavigation)
                     .WithMany(p => p.BinhLuan)
@@ -229,9 +251,9 @@ namespace Cosmetic.Models
                     .HasColumnName("MaNV")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.NgayDat).HasColumnType("datetime");
+                entity.Property(e => e.NgayDat).HasColumnType("timestamp");
 
-                entity.Property(e => e.NgayGiao).HasColumnType("datetime");
+                entity.Property(e => e.NgayGiao).HasColumnType("timestamp");
 
                 entity.Property(e => e.TenNgNhan).HasMaxLength(50);
 
@@ -265,7 +287,7 @@ namespace Cosmetic.Models
                     .HasColumnName("MaNV")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.NgayDua).HasColumnType("datetime");
+                entity.Property(e => e.NgayDua).HasColumnType("timestamp");
 
                 entity.Property(e => e.TraLoi).HasMaxLength(50);
 
@@ -379,7 +401,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.NgayPc)
                     .HasColumnName("NgayPC")
-                    .HasColumnType("datetime");
+                    .HasColumnType("timestamp");
 
                 entity.HasOne(d => d.MaNvNavigation)
                     .WithMany(p => p.PhanCong)
@@ -520,7 +542,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.MoTa).HasMaxLength(50);
 
-                entity.Property(e => e.NgayChon).HasColumnType("datetime");
+                entity.Property(e => e.NgayChon).HasColumnType("timestamp");
 
                
 
