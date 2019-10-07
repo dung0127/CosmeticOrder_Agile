@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Frontend.cshtml";
     string loai = "Tất cả Sản phẩm";
+    string loai1 = "BB/CC/DD Cushion";
     if (ViewBag.Loai != null)
     {
         loai = (ViewBag.Loai as Loai).TenLoai;
@@ -113,7 +114,7 @@
                     }
                     <!-- /.table-responsive-->
                     <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-                        <div class="left"><a asp-action="Index" asp-controller="SanPham" asp-route-id="1" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a></div>
+                        <div class="left"><a asp-action="Index" asp-route-loai="@loai1.ToUrlFriendly()" asp-controller="SanPham"  class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a></div>
                         <div class="right">
                             <a class="btn btn-outline-secondary" asp-action="Delete" asp-controller="GioHang" onclick="return confirm('Bạn có chắc chắn muốn xóa hết giỏ hàng?')"><i class="fa fa-trash-o"></i>Xóa giỏ hàng</a>
                             <a asp-action="Index" asp-controller="ThanhToan"><button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button></a>
