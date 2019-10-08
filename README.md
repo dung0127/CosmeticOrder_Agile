@@ -4,9 +4,12 @@
 ## Changing ConnectionString at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/appsettings.json
 
 <code>
-  "ConnectionStrings": {
-    "WebMyPham": "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;"
-  },
+  
+  
+  
+    "ConnectionStrings": {
+        "WebMyPham": "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;"
+    },
 </code>
 
 ## Changing Database Source at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Startup.cs
@@ -14,13 +17,15 @@
 - Using PostgreSQL Entity Framework Core
 
 <code> 
-  services.AddEntityFrameworkNpgsql().AddDbContext<MyPhamContext>(options => opions.UseNpgsql(Configuration.GetConnectionString("WebMyPham")));
+              
+              services.AddEntityFrameworkNpgsql().AddDbContext<MyPhamContext>(options => opions.UseNpgsql(Configuration.GetConnectionString("WebMyPham")));
 </code>
 
 - Using Microsoft SQL Server
 
 <code>
-  services.AddDbContext<MyPhamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebMyPham")));       
+              
+              services.AddDbContext<MyPhamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebMyPham")));       
 </code>
 
 ## Changing Database source at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
@@ -56,4 +61,26 @@
                 //////////////////////////////////////////////////////////////////////////
             }
         }
+ </code>
+ 
+## And at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
+- If you can't update databse using these command:
+<code>
+  
+  
+    dotnet ef migrations add InitialCreate
+  
+  
+    dotnet ef database update
+</code>
+
+Please change Datatype "timestamp" into "DateTime"
+- Ex:
+Changing
+<code>
+                entity.Property(e => e.NgayGui).HasColumnType("timestamp");
+ </code> 
+into 
+<code>
+                entity.Property(e => e.NgayGui).HasColumnType("DateTime");
  </code>
