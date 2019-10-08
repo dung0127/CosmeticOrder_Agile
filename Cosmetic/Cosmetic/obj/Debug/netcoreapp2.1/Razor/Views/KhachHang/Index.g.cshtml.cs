@@ -102,7 +102,7 @@ using Cosmetic.Models;
             WriteLiteral("a>");
             EndContext();
             BeginContext(1116, 115, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8334ce15bec0445a99e7272b7554d459", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "814af17af7d042ae9aa45f8bddd98c5d", async() => {
                 BeginContext(1181, 46, true);
                 WriteLiteral("<i class=\"fa fa-heart\"></i> Sản phẩm yêu thích");
                 EndContext();
@@ -124,7 +124,7 @@ using Cosmetic.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             EndContext();
             BeginContext(1231, 112, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "16c7a69e7bef4ef6880a2c1a240a6bf3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "43445e1bbfbb41258b618b918aafcdf9", async() => {
                 BeginContext(1304, 35, true);
                 WriteLiteral("<i class=\"fa fa-user\"></i>Tài khoản");
                 EndContext();
@@ -146,7 +146,7 @@ using Cosmetic.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             EndContext();
             BeginContext(1343, 112, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "945a6f3677a1474a8e3e4aa33cb275ef", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "212fa4e348e94855a62bcef3b8cc2744", async() => {
                 BeginContext(1411, 40, true);
                 WriteLiteral("<i class=\"fa fa-sign-out\"></i> Đăng xuất");
                 EndContext();
@@ -184,7 +184,7 @@ using Cosmetic.Models;
                     ");
             EndContext();
             BeginContext(1952, 1854, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "403fa9890c3d40a9861379e4a96d119d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b8438669727849f18a630fd59fbaf78d", async() => {
                 BeginContext(2004, 1391, true);
                 WriteLiteral(@"
                         <div class=""row"">
@@ -215,7 +215,7 @@ using Cosmetic.Models;
                                 ");
                 EndContext();
                 BeginContext(3395, 60, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "04748b8cb91f4e239c34cda56d139746", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "413d4de1cf54420294b946fcffbcffa1", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -267,7 +267,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
             WriteLiteral("\n                    <h3 class=\"mt-5\">Thông tin khách hàng</h3>\n                    ");
             EndContext();
             BeginContext(3890, 2966, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "13881376adab415c8eb1aa345e20249a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "27bac59926b244809dec04ffc36b3b5f", async() => {
                 BeginContext(3942, 710, true);
                 WriteLiteral(@"
                         <div class=""row"">
@@ -286,7 +286,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
                                         ");
                 EndContext();
                 BeginContext(4652, 45, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72b60ea4b4e74000a076583ad621de26", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "830bb06b12f9419fb3f888addadb0484", async() => {
                     BeginContext(4685, 3, true);
                     WriteLiteral("Nam");
                     EndContext();
@@ -309,7 +309,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
                 WriteLiteral("\n                                        ");
                 EndContext();
                 BeginContext(4738, 65, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c69db3b6f2da450c88ec5ccc4b5a4732", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c122ed050ad74ee1a10af6d35419540a", async() => {
                     BeginContext(4792, 2, true);
                     WriteLiteral("Nữ");
                     EndContext();

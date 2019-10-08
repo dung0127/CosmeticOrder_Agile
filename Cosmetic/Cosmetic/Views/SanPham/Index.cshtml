@@ -93,20 +93,24 @@
                         <div class="col-md-12 col-lg-7 products-number-sort">
                             <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
                                 <div class="products-number">
-                                    Hiển thị &nbsp;
-                                    <select name="sort-by" class="form-control">
-                                        <option>12</option>
-                                        <option>24</option>
-                                        <option>50</option>
-                                    </select><span>sản phẩm</span>
+                                    Hiển thị theo giá &nbsp;
+                                    <select name="mucgia" class="form-control">
+                                        <option value="100000">Dưới 100.000</option>
+                                        <option value="500000">100.000 - 500.000</option>
+                                        <option value="1000000">500.000 - 1.000.000</option>
+                                        <option value="1000001">Trên 1.000.000</option>
+                                        <option value="tatca">Tất cả</option>
+                                    </select><span>đồng</span>
                                 </div>
                                 <div class="products-sort-by mt-2 mt-lg-0">
                                     <strong>Sắp xếp</strong>
-                                    <select name="sort-by" class="form-control">
-                                        <option>Giá tăng dần</option>
-                                        <option>Giá giảm dần</option>
+                                    <select name="sapxep" class="form-control">
+                                        <option value="tang">Giá tăng dần</option>
+                                        <option value="giam">Giá giảm dần</option>
+                                        <option value="tatca">Tất cả</option>
                                     </select>
-                                </div>
+                                
+                                    <button class="btn btn-default" id="submit-filter">Lọc sản phẩm</button>
                             </form>
                         </div>
                     </div>

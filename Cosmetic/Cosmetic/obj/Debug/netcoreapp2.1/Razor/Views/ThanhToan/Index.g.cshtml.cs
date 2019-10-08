@@ -92,7 +92,7 @@ using Cosmetic.Models;
                     <div class=""nav flex-column flex-md-row nav-pills text-center"">");
             EndContext();
             BeginContext(792, 185, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "808428fced9f4ec5a44c12475b7935c9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4040ec8a5ea74f98a483eae374f4bcd0", async() => {
                 BeginContext(898, 75, true);
                 WriteLiteral("  <i class=\"fa fa-map-marker\">                      </i>Thông tin giao hàng");
                 EndContext();
@@ -114,7 +114,7 @@ using Cosmetic.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             EndContext();
             BeginContext(977, 165, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3f909553df8a4306955f87a5ee694e2a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9830e1b80292407a9f1351ed44731c8f", async() => {
                 BeginContext(1080, 58, true);
                 WriteLiteral("<i class=\"fa fa-eye\">                  </i>Hóa đơn của bạn");
                 EndContext();
@@ -146,7 +146,7 @@ using Cosmetic.Models;
                     ");
             EndContext();
             BeginContext(1474, 2463, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "93fcd1f0ce8d4ada99afa36da9a762c6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2e93cfda9e614479874b1e084776f0c6", async() => {
                 BeginContext(1539, 2065, true);
                 WriteLiteral(@"
                         <div class=""content py-3"">
@@ -188,7 +188,7 @@ using Cosmetic.Models;
                 WriteLiteral("                 ");
                 EndContext();
                 BeginContext(3604, 136, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2cfaf2dde4f14d11af97870dc44eb9f5", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "532a41d9d4374dbfb759f2840ec42aa0", async() => {
                     BeginContext(3685, 51, true);
                     WriteLiteral("<i class=\"fa fa-chevron-left\"></i>Quay lại giỏ hàng");
                     EndContext();

@@ -159,7 +159,7 @@ using Cosmetic.Models;
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(2170, 1581, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1cc9f1bf319f45f3b8b87e4490a34c06", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "da378e555c7847b98f8cad2d61036966", async() => {
                 BeginContext(2235, 179, true);
                 WriteLiteral("\n                                        <tbody>\n                                            <tr>\n                                                <input type=\"hidden\" name=\"masua\"");
                 EndContext();
@@ -174,9 +174,9 @@ WriteAttributeValue("", 2422, item.MaHh, 2422, 10, false);
                 WriteLiteral(" />\n                                                <td>");
                 EndContext();
                 BeginContext(2489, 169, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff6b145e3b8f4330bcd440731eb1e802", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "203e7630ac27441086391d2bdd639abe", async() => {
                     BeginContext(2611, 43, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "533fbf5a2adc4b60a0ce9e4bf7c367c2", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "20fa65e945b444039e60febc20be9aea", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -240,7 +240,7 @@ AddHtmlAttributeValue("", 2635, item.Hinh, 2635, 10, false);
                 WriteLiteral("</td>\n                                                <td>");
                 EndContext();
                 BeginContext(2716, 137, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "02f8e473d4b842b59b4aa1a4ba16bfa1", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "23b0c71b56ef458884a87c91add57a7e", async() => {
                     BeginContext(2839, 10, false);
 #line 60 "/home/moccax1/Documents/WebProJD/Agile/CosmeticOrder_Agile/Cosmetic/Cosmetic/Views/GioHang/Index.cshtml"
                                                                                                                                                                          Write(item.TenHh);
@@ -320,7 +320,7 @@ WriteAttributeValue("", 3002, item.SoLuong, 3002, 13, false);
                 WriteLiteral(" đ</td>\n                                                <td><button class=\"btn btn-outline-secondary\"><i class=\"fa fa-refresh\"></i></button></td>\n                                                <td>");
                 EndContext();
                 BeginContext(3475, 128, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "216354b90fe048428babe132a0f34c65", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bf57e89c2cef4b2182af3f8dfe35c40c", async() => {
                     BeginContext(3586, 13, true);
                     WriteLiteral("&nbsp;x&nbsp;");
                     EndContext();
@@ -432,7 +432,7 @@ WriteAttributeValue("", 3002, item.SoLuong, 3002, 13, false);
                                     ");
             EndContext();
             BeginContext(5138, 387, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46c900a131274715b2cd45f298d9f017", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecdb14dc224d4cd986d65a324b48424e", async() => {
                 BeginContext(5203, 315, true);
                 WriteLiteral(@"
                                         <tr style=""text-align:center"">
@@ -482,7 +482,7 @@ WriteAttributeValue("", 3002, item.SoLuong, 3002, 13, false);
             WriteLiteral("                    <!-- /.table-responsive-->\n                    <div class=\"box-footer d-flex justify-content-between flex-column flex-lg-row\">\n                        <div class=\"left\">");
             EndContext();
             BeginContext(6146, 178, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e2f36506763a4e4f90828cc17937a862", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "27c6531303f940d087ebd2f3bdb71d10", async() => {
                 BeginContext(6268, 52, true);
                 WriteLiteral("<i class=\"fa fa-chevron-left\"></i> Tiếp tục mua sắm ");
                 EndContext();
@@ -520,7 +520,7 @@ WriteAttributeValue("", 3002, item.SoLuong, 3002, 13, false);
             WriteLiteral("</div>\n                        <div class=\"right\">\n                            ");
             EndContext();
             BeginContext(6403, 195, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1010cc20fe6040e3952bc1dae342ed3f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6c22d4db416144458483f08c1115f9d8", async() => {
                 BeginContext(6553, 41, true);
                 WriteLiteral("<i class=\"fa fa-trash-o\"></i>Xóa giỏ hàng");
                 EndContext();
@@ -546,7 +546,7 @@ WriteAttributeValue("", 3002, item.SoLuong, 3002, 13, false);
             WriteLiteral("\n                            ");
             EndContext();
             BeginContext(6627, 154, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08cd4c3a181a46c7baef50d8ba4a09b5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7da8ae234054b0c930fb426db8938e0", async() => {
                 BeginContext(6676, 101, true);
                 WriteLiteral("<button type=\"submit\" class=\"btn btn-primary\">Thanh toán <i class=\"fa fa-chevron-right\"></i></button>");
                 EndContext();
@@ -631,7 +631,7 @@ WriteAttributeValue("", 3002, item.SoLuong, 3002, 13, false);
                     ");
             EndContext();
             BeginContext(8518, 412, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7ff310a521b48fc9d5febfac1dd502e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15ae1dbfc9ad4d9086da4f42f8375573", async() => {
                 BeginContext(8524, 399, true);
                 WriteLiteral(@"
                         <div class=""input-group"">
