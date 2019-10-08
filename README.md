@@ -18,7 +18,7 @@
             "WebMyPham": "Server=.; Database=MyPham; Integrated Security=True"
         },
     ```
-## Changing Database Source 
+## Changing Database Connection using a specific EF Core provider  
 > Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Startup.cs
 
   - Using PostgreSQL Entity Framework Core
@@ -50,8 +50,8 @@
                 ...
             }      
   
-## Migration
-> Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
+## Database & Migration
+> Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/
 
   - Create the database:
       
@@ -96,7 +96,9 @@
 
 Note: Please notice <b>Datatype</b> if there is any error.
 
-  - Ex "timestamp" into "DateTime" if you are using SQL Server: 
+  - Ex: "timestamp" into "DateTime" if you are using SQL Server 
+  
+    > Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
     
     Changing
                      
