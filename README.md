@@ -2,13 +2,25 @@
 
 
 ## Changing ConnectionString at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/appsettings.json
-<code>
-    
+
+
+- Linux + PostgreSQL
+<code>    
   
     "ConnectionStrings": {
         "WebMyPham": "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;"
     },
 </code>
+
+
+- Windows + SQL Server, it's similar to this:
+<code>    
+    
+    "ConnectionStrings": {
+        "WebMyPham": "Server=.; Database=MyPham; Integrated Security=True"
+    },
+</code>
+
 
 ## Changing Database Source at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Startup.cs
 
@@ -61,8 +73,8 @@
         }
  </code>
  
-## And at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
-- If you can't update databse using these command:
+## And at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs (For Migration etc...)
+- If you can't update database using these command:
 <code>
   
   
@@ -72,7 +84,7 @@
     dotnet ef database update
 </code>
 
-Please change Datatype "timestamp" into "DateTime"
+Please change Datatype "timestamp" into "DateTime" if you are using SQL Server!
 - Ex:
 Changing
 <code>
