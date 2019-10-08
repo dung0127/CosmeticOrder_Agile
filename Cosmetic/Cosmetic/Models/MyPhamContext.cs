@@ -60,10 +60,10 @@ namespace Cosmetic.Models
                 string connectionString = configuration.GetConnectionString("WebMyPham");
                 /////////////////////////////////////////////////////////////////////////
                 //Sử dụng PostgreSQL Entity Framework Core
-                optionsBuilder.UseNpgsql(connectionString);
+                //optionsBuilder.UseNpgsql(connectionString);
                 
                 //Sử dụng Microsoft SQL Server
-                //optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer(connectionString);
                 //////////////////////////////////////////////////////////////////////////
             }
         }
@@ -89,7 +89,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
-                entity.Property(e => e.NgayGui).HasColumnType("timestamp");
+                entity.Property(e => e.NgayGui).HasColumnType("DateTime");
 
                 entity.HasOne(d => d.MaKhNavigation)
                     .WithMany(p => p.BanBe)
@@ -118,14 +118,14 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.NgayGy)
                     .HasColumnName("NgayGY")
-                    .HasColumnType("timestamp");
+                    .HasColumnType("DateTime");
             });
 
             modelBuilder.Entity<Blog>(entity =>
             {
                 entity.HasKey(e => e.MaBlog);
 
-                entity.Property(e => e.NgayDang).HasColumnType("timestamp");
+                entity.Property(e => e.NgayDang).HasColumnType("DateTime");
 
                 entity.Property(e => e.TenBlog).HasMaxLength(50);
 
@@ -153,7 +153,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.NgayBl)
                     .HasColumnName("NgayBL")
-                    .HasColumnType("timestamp");
+                    .HasColumnType("DateTime");
 
                 entity.HasOne(d => d.MaKhNavigation)
                     .WithMany(p => p.BinhLuan)
@@ -251,9 +251,9 @@ namespace Cosmetic.Models
                     .HasColumnName("MaNV")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.NgayDat).HasColumnType("timestamp");
+                entity.Property(e => e.NgayDat).HasColumnType("DateTime");
 
-                entity.Property(e => e.NgayGiao).HasColumnType("timestamp");
+                entity.Property(e => e.NgayGiao).HasColumnType("DateTime");
 
                 entity.Property(e => e.TenNgNhan).HasMaxLength(50);
 
@@ -287,7 +287,7 @@ namespace Cosmetic.Models
                     .HasColumnName("MaNV")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.NgayDua).HasColumnType("timestamp");
+                entity.Property(e => e.NgayDua).HasColumnType("DateTime");
 
                 entity.Property(e => e.TraLoi).HasMaxLength(50);
 
@@ -401,7 +401,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.NgayPc)
                     .HasColumnName("NgayPC")
-                    .HasColumnType("timestamp");
+                    .HasColumnType("DateTime");
 
                 entity.HasOne(d => d.MaNvNavigation)
                     .WithMany(p => p.PhanCong)
@@ -542,7 +542,7 @@ namespace Cosmetic.Models
 
                 entity.Property(e => e.MoTa).HasMaxLength(50);
 
-                entity.Property(e => e.NgayChon).HasColumnType("timestamp");
+                entity.Property(e => e.NgayChon).HasColumnType("DateTime");
 
                
 
