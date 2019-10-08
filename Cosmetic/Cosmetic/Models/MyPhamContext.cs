@@ -48,7 +48,7 @@ namespace Cosmetic.Models
                 .Split(new String[] { 
                     //Nếu dùng windows sửa @"bin/" thành @"bin\"
                     //Nếu dùng Linux sửa @"bin\" thành @"bin/"
-                    @"bin/"                
+                    @"bin\"                
                     }, StringSplitOptions.None)[0];
                 
                 //Chỉ cần thay đổi connectionstring tại appsettings.json
