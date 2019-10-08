@@ -9,6 +9,7 @@
         "WebMyPham": "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;"
     },
 </code>
+
 ## Changing Database Source at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Startup.cs
 
 - Using PostgreSQL Entity Framework Core
