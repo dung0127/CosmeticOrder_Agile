@@ -19,11 +19,11 @@ namespace Cosmetic.Controllers
 
 
         [Route("san-pham/{loai}")]
-        public async Task<IActionResult> Index(string loai, string mucgia, string sapxep , int page = 1)
+        public async Task<IActionResult> Index(string loai, string mucgia, string sapxep, int page = 1)
         {       
-
+            
             var qry = db.SanPham.AsNoTracking().OrderBy(p => p.MaSp);
-            var model = await PagingList.CreateAsync(qry, 9, page);
+            var model = await PagingList.CreateAsync(qry, 12, page);
             if (loai != null)
             {
                 ViewBag.Loai = db.Loai.SingleOrDefault(p => p.TenLoaiSeoUrl == loai);
@@ -46,7 +46,7 @@ namespace Cosmetic.Controllers
                         qery = qery.Where(p => p.DonGia >= 1000000).OrderBy(p => p.MaSp);                        
                         break;
                     case "tatca":
-                       db.SanPham.Where(p => p.MaLoai == qery1.MaLoai).AsNoTracking().OrderBy(p => p.MaSp);                       
+                       qery = qery.Where(p => p.MaLoai == qery1.MaLoai).AsNoTracking().OrderBy(p => p.MaSp);                       
                        break;
                     default:
                         break;
@@ -67,7 +67,7 @@ namespace Cosmetic.Controllers
                         break;
                 }
 
-                var md = await PagingList.CreateAsync(qery, 9, page);
+                var md = await PagingList.CreateAsync(qery, 12, page);
 
                 
                 return View(md);
@@ -110,10 +110,12 @@ namespace Cosmetic.Controllers
             return View(hh);
         }
         
-        public IActionResult timKiem(string inp)
+        public IActionResult timKiem()
         {
             return View();
         }
+
+        [Route("[controller]/[action]")]
         public IActionResult timSp()
         {
             string key = Request.Form["keysearch"].ToString();
