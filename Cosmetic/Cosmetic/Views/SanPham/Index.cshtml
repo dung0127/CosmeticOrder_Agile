@@ -89,28 +89,79 @@
             <div class="col-lg-9">
                 <div class="box info-bar">
                     <div class="row">
-                        <div class="col-md-12 col-lg-4 products-showing">Hiển thị <strong>12</strong> trên <strong>25</strong> sản phẩm</div>
-                        <div class="col-md-12 col-lg-7 products-number-sort">
-                            <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
-                                <div class="products-number">
-                                    Hiển thị theo giá &nbsp;
-                                    <select name="mucgia" class="form-control">
-                                        <option value="100000">Dưới 100.000</option>
-                                        <option value="500000">100.000 - 500.000</option>
-                                        <option value="1000000">500.000 - 1.000.000</option>
-                                        <option value="1000001">Trên 1.000.000</option>
-                                        <option value="tatca">Tất cả</option>
-                                    </select><span>đồng</span>
+                        <div class="col-md-12 col-lg-4 products-showing">Hiển thị <strong>12</strong> trên <strong>25</strong> sản phẩm</div>                                     
+                        
+                        <div class="col-md-12 col-lg-7 products-number-sort">                       
+                            <div class="products-number">                                    
                                 </div>
+                            <style>
+                            #MyForm
+                            {
+                                display: none;
+                                width: 300px;
+                                border: 1px solid #ccc;
+                                padding: 24px;
+                                background: #ececec;
+                            } 
+                            </style>
+                            <script>
+                                $(document).ready(function(){
+                                $('#Mybtn').click(function(){
+                                $('#MyForm').toggle(500);
+                                });
+                                });
+                            </script>
+                            <button id="Mybtn" class="btn btn-primary">Hiện bộ lọc</button>
+                            <form id="MyForm">
+                                
                                 <div class="products-sort-by mt-2 mt-lg-0">
-                                    <strong>Sắp xếp</strong>
+                                    Giá cả
+                                    <select name="mucgia" class="form-control">
+                                        <option value="tatca">Tất cả</option>
+                                        <option value="100000">Dưới 100.000 đồng</option>
+                                        <option value="500000">100.000 - 500.000 đồng</option>
+                                        <option value="1000000">500.000 - 1.000.000 đồng</option>
+                                        <option value="1000001">Trên 1.000.000 đồng</option>
+                                    </select>
+                                </div>
+
+                                <div class="products-sort-by mt-2 mt-lg-0">
+                                    Sắp xếp
                                     <select name="sapxep" class="form-control">
+                                        <option value="tatca">...</option>
                                         <option value="tang">Giá tăng dần</option>
                                         <option value="giam">Giá giảm dần</option>
-                                        <option value="tatca">Tất cả</option>
                                     </select>
+                                </div>
+
+                                <div class="products-sort-by mt-2 mt-lg-0">
+                                    Thương hiệu
+                                    <select name="thuonghieu" class="form-control">
+                                        <option value="tatca">Tất cả</option>
+                                        @{             
+                                            var entry1 = (from li in db.Loai 
+                                                        join sp in db.SanPham on li.MaLoai equals sp.MaLoai 
+                                                        join th in db.ThuongHieu on sp.MaHieu equals th.MaHieu
+                                                        where li.TenLoai.Contains(loai)
+                                                        select new 
+                                                        {
+                                                            th.MaHieu,
+                                                            th.TenHieu
+                                                        }).Distinct();
+
+
+                                            var dsThuongHieu = entry1.ToList();                                                                
+                                            foreach (var item in dsThuongHieu)
+                                            {
+                                                <option value="@item.MaHieu">@item.TenHieu</option>
+                                            }    
+                                        }                                    
+                                    </select> 
+                                </div>
                                 
-                                    <button class="btn btn-default" id="submit-filter">Lọc sản phẩm</button>
+                                <div class="products-sort-by mt-lg-2">
+                                    <button class="btn btn-primary" id="submit-filter">Lọc sản phẩm</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -186,3 +237,5 @@
         </div>
     </div>
 </div>
+
+

@@ -19,7 +19,7 @@ namespace Cosmetic.Controllers
 
 
         [Route("san-pham/{loai}")]
-        public async Task<IActionResult> Index(string loai, string mucgia, string sapxep, int page = 1)
+        public async Task<IActionResult> Index(string loai, string mucgia, string sapxep, string thuonghieu, int page = 1)
         {       
             
             var qry = db.SanPham.AsNoTracking().OrderBy(p => p.MaSp);
@@ -29,7 +29,30 @@ namespace Cosmetic.Controllers
                 ViewBag.Loai = db.Loai.SingleOrDefault(p => p.TenLoaiSeoUrl == loai);
                 Loai qery1 = db.Loai.SingleOrDefault(p => p.TenLoaiSeoUrl == loai);
                 var qery = db.SanPham.Where(p => p.MaLoai == qery1.MaLoai).AsNoTracking().OrderBy(p => p.MaSp);
+                ThuongHieu qery2 = db.ThuongHieu.SingleOrDefault(p => p.MaHieu.ToString() == thuonghieu);              
+                
+                if (thuonghieu == "tatca")
+                {
+                    qery = qery.Where(p => p.MaLoai == qery1.MaLoai).AsNoTracking().OrderBy(p => p.MaSp);
+                }
+                else
+                {
+                    bool check = false;
+                    var dsThuongHieu = db.ThuongHieu.ToList();                                                       
+                    foreach (var item in dsThuongHieu)
+                    {
+                        if (item.MaHieu.ToString() == thuonghieu)
+                        {
+                            check = true;
+                            break;
+                        }
+                    }
 
+                    if (check == true)
+                    {
+                        qery = qery.Where(p=> p.MaHieu == qery2.MaHieu).AsNoTracking().OrderBy(p=>p.MaHieu);
+                    }
+                }
 
                 switch (mucgia)
                 {
@@ -67,7 +90,7 @@ namespace Cosmetic.Controllers
                         break;
                 }
 
-                var md = await PagingList.CreateAsync(qery, 12, page);
+                var md = await PagingList.CreateAsync(qery, 99, page);
 
                 
                 return View(md);
