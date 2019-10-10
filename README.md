@@ -1,98 +1,108 @@
-# CosmeticOrder_Agile
+# CosmeticOrder Agile
 
 
-## Changing ConnectionString at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/appsettings.json
+## Changing ConnectionString 
+> Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/appsettings.json
 
+  - Linux + PostgreSQL:
+    ```sh
 
-- Linux + PostgreSQL
-<code>    
-  
-    "ConnectionStrings": {
-        "WebMyPham": "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;"
-    },
-</code>
+        "ConnectionStrings": {
+            "WebMyPham": "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;"
+        },
+    ```
+  - Windows + SQL Server, it's similar to this:
+    ```sh
 
+        "ConnectionStrings": {
+            "WebMyPham": "Server=.; Database=MyPham; Integrated Security=True"
+        },
+    ```
+## Changing Database Connection using a specific EF Core provider  
+> Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Startup.cs
 
-- Windows + SQL Server, it's similar to this:
-<code>    
+  - Using PostgreSQL Entity Framework Core
+
+    ```sh
+    services.AddEntityFrameworkNpgsql().AddDbContext<MyPhamContext>(options => opions.UseNpgsql(Configuration.GetConnectionString("WebMyPham")));
+    ```
+
+  - Using Microsoft SQL Server
+
+    ```sh
+    services.AddDbContext<MyPhamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebMyPham")));       
+    ```
+
+> Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
     
-    "ConnectionStrings": {
-        "WebMyPham": "Server=.; Database=MyPham; Integrated Security=True"
-    },
-</code>
-
-
-## Changing Database Source at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Startup.cs
-
-- Using PostgreSQL Entity Framework Core
-
-<code> 
-              
-              services.AddEntityFrameworkNpgsql().AddDbContext<MyPhamContext>(options => opions.UseNpgsql(Configuration.GetConnectionString("WebMyPham")));
-</code>
-
-- Using Microsoft SQL Server
-
-<code>
-              
-              services.AddDbContext<MyPhamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebMyPham")));       
-</code>
-
-## Changing Database source at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
-
-<code>
-  
- 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                
-                string projectPath = AppDomain.CurrentDomain.BaseDirectory
-                .Split(new String[] { 
-                    //If you are using Windows, please change @"bin/" into @"bin\"
-                    //If you are using Linux, please change @"bin\" into @"bin/"
-                    @"bin/"                
-                    }, StringSplitOptions.None)[0];
-                
-                //Just changing connectionstring on file appsettings.json
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(projectPath)
-                .AddJsonFile("appsettings.json")
-                .Build();
+                ...
 
-                string connectionString = configuration.GetConnectionString("WebMyPham");
-                /////////////////////////////////////////////////////////////////////////
-                //If you are using PostgreSQL Entity Framework Core
-                optionsBuilder.UseNpgsql(connectionString);
-                
-                //If you are using Microsoft SQL Server
-                //optionsBuilder.UseSqlServer(connectionString);
-                //////////////////////////////////////////////////////////////////////////
-            }
-        }
- </code>
- 
-## And at ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs (For Migration etc...)
-- If you can't update database using these command:
-<code>
-  
-  
-    dotnet ef migrations add InitialCreate
-  
-  
-    dotnet ef database update
-</code>
+                    string connectionString = configuration.GetConnectionString("WebMyPham");
+                    /////////////////////////////////////////////////////////////////////////
+                    //If you are using PostgreSQL Entity Framework Core
+                    optionsBuilder.UseNpgsql(connectionString);
 
-Please change Datatype "timestamp" into "DateTime" if you are using SQL Server!
-- Ex:
-Changing
-<code>
-                
-                entity.Property(e => e.NgayGui).HasColumnType("timestamp");
- </code> 
-into 
-<code>
-                
-                entity.Property(e => e.NgayGui).HasColumnType("DateTime");
- </code>
+                    //If you are using Microsoft SQL Server
+                    //optionsBuilder.UseSqlServer(connectionString);
+                    //////////////////////////////////////////////////////////////////////////
+                ...
+            }      
+  
+## Database & Migration
+> Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/
+
+  - Create the database:
+      
+      <i> Using Visual Studio: </i> Tools -> NuGet Package Manger -> Package Manger Console, run the following command:
+    
+    ```sh
+        Install-Package Microsoft.EntityFrameworkCore.Tools
+        Add-Migration InitialCreate
+        Update-Database
+    ```
+  
+      <i> Using .Net Core CLI:</i>
+      
+    ```sh
+        dotnet tool install --global dotnet-ef
+        dotnet add package Microsoft.EntityFrameworkCore.Design
+        dotnet ef migrations add InitialCreate
+        dotnet ef database update
+    ```
+
+  - If you have an Existing Database:
+  
+    <b>For Windows + SQL Server:</b>
+    
+      <i> Using Visual Studio: </i> Tools -> NuGet Package Manger -> Package Manger Console, run the following command:
+
+      ```sh
+      PM> Scaffold-DbContext "Server=.; Database=MyPham; Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+      ```
+
+       <i> Using .Net Core CLI:</i>
+        
+      ```sh  
+      > dotnet ef dbcontext scaffold "Server=.; Database=MyPham; Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -o Models
+      ```
+      
+    <b>For Linux + PostgreSQL:</b>
+   
+      ```sh
+      $ dotnet ef dbcontext scaffold "User ID=netcore;Password=netcore;Host=localhost;Port=5432;Database=mypham;" Npgsql.EntityFrameworkCore.PostgreSQL
+      ```
+
+Note: Please notice <b>Datatype</b> if there is any error.
+
+  - Ex: "timestamp" into "DateTime" if you are using SQL Server 
+  
+    > Path: ~/CosmeticOrder_Agile/Cosmetic/Cosmetic/Models/MyPhamContext.cs
+    
+    Changing
+                     
+                      entity.Property(e => e.NgayGui).HasColumnType("timestamp");
+    into                
+    
+                      entity.Property(e => e.NgayGui).HasColumnType("DateTime");

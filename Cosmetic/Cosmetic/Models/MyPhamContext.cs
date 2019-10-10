@@ -45,11 +45,7 @@ namespace Cosmetic.Models
             {
                 
                 string projectPath = AppDomain.CurrentDomain.BaseDirectory
-                .Split(new String[] { 
-                    //Nếu dùng windows sửa @"bin/" thành @"bin\"
-                    //Nếu dùng Linux sửa @"bin\" thành @"bin/"
-                    @"bin/"                
-                    }, StringSplitOptions.None)[0];
+                .Split(new String[] {@"bin"}, StringSplitOptions.None)[0];
                 
                 //Chỉ cần thay đổi connectionstring tại appsettings.json
                 IConfigurationRoot configuration = new ConfigurationBuilder()
