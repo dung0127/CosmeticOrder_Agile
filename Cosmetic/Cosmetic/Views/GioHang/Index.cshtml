@@ -11,6 +11,9 @@
 }
 
 <div id="content">
+    @{
+        double tongtien = 0;
+    }
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -26,9 +29,7 @@
             <div id="basket" class="col-lg-9">
                 <div class="box">
                     <h1>Giỏ Hàng</h1>
-                    @{
-                        double tongtien = 0;
-                    }
+
 
                     @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
                     {
@@ -61,7 +62,6 @@
                                                 <td>
                                                     <input type="number" name="sl" value="@item.SoLuong" min="1" class="form-control">
                                                 </td>
-
                                                 <td>@item.GiaBan.ToString("#,##0") đ</td>
                                                 <td>@item.ThanhTien.ToString("#,##0") đ</td>
                                                 <td><button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i></button></td>
@@ -83,8 +83,10 @@
                             </table>
                         </div>
                     }
+
                     else
                     {
+
                         <p class="text-muted">Bạn có 0 sản phẩm trong giỏ hàng.</p>
                         <div class="table-responsive">
                             <table class="table">
@@ -114,7 +116,7 @@
                     }
                     <!-- /.table-responsive-->
                     <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-                        <div class="left"><a asp-action="Index" asp-route-loai="@loai1.ToUrlFriendly()" asp-controller="SanPham"  class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a></div>
+                        <div class="left"><a asp-action="Index" asp-route-loai="@loai1.ToUrlFriendly()" asp-controller="SanPham" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a></div>
                         <div class="right">
                             <a class="btn btn-outline-secondary" asp-action="Delete" asp-controller="GioHang" onclick="return confirm('Bạn có chắc chắn muốn xóa hết giỏ hàng?')"><i class="fa fa-trash-o"></i>Xóa giỏ hàng</a>
                             <a asp-action="Index" asp-controller="ThanhToan"><button type="submit" class="btn btn-primary">Thanh toán <i class="fa fa-chevron-right"></i></button></a>
@@ -134,20 +136,20 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                        <td>Tổng tiền giỏ hàng</td>
-                                        <th>@tongtien.ToString("#,##0") đ</th>
+                                    <td>Tổng tiền giỏ hàng</td>
+                                    <th>@tongtien.ToString("#,##0") đ</th>
                                 </tr>
                                 <tr>
-                                        <td>Phí giao hàng</td>
-                                        <th>Miễn phí</th>
+                                    <td>Phí giao hàng</td>
+                                    <th>Miễn phí</th>
                                 </tr>
                                 <tr>
-                                        <td>Khuyến mãi</td>
-                                        <th>0 </th>
+                                    <td>Khuyến mãi</td>
+                                    <th>0 </th>
                                 </tr>
                                 <tr class="total">
-                                        <td>Tổng cộng</td>
-                                        <th>@tongtien.ToString("#,##0") đ</th>
+                                    <td>Tổng cộng</td>
+                                    <th>@tongtien.ToString("#,##0") đ</th>
                                 </tr>
                             </tbody>
                         </table>
