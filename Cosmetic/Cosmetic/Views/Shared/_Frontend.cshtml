@@ -108,16 +108,9 @@
                     <div class="col-lg-6 offer mb-3 mb-lg-0"><span id="dongHo"></span>&nbsp;<a href="#" class="btn btn-success btn-sm">Flash sale</a><a href="#" class="ml-1">giảm ngay 35% toàn bộ sản phẩm</a></div>
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
-                            @if (Context.Session.Get<KhachHang>("TaiKhoan") != null)
-                            {
-                                KhachHang khach = Context.Session.Get<KhachHang>("TaiKhoan");
-                                <li class="list-inline-item"><a asp-controller="KhachHang">Xin chào @khach.HoTen !</a></li>
-                                <li class="list-inline-item"><a asp-action="DangXuat" asp-controller="DangNhap">Đăng xuất</a></li>
-                            }
-                            else
-                            {
-                                <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
-                            }
+                            
+                            <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                            
                             <li class="list-inline-item"><a asp-action="../KhachHangs/AddnewKhachhang">Thêm mới</a></li>
                             <li class="list-inline-item"><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
                         </ul>
@@ -227,27 +220,13 @@
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Bài viết</h5>
                                             <ul class="list-unstyled mb-3">
-                                                @foreach (var item in dsLoai2)
-                                                {
-                                                    <li class="nav-item">
-                                                        <a asp-action="Index" asp-controller="Blog">
-                                                            @item.TenLoaiBlog
-                                                        </a>
-                                                    </li>
-                                                }
+                                               
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
                                             <h5>Beauty blogger</h5>
                                             <ul class="list-unstyled mb-3">
-                                                @foreach (var item in dsLoai3)
-                                                {
-                                                    <li class="nav-item">
-                                                        <a asp-action="Index" asp-controller="Blog">
-                                                            @item.TenLoaiBlog
-                                                        </a>
-                                                    </li>
-                                                }
+                                                
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
@@ -305,6 +284,8 @@
                     <div class="navbar-buttons d-flex justify-content-end">
                         <!-- /.nav-collapse-->
                         <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
+
+
                         @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
                         {
                             List<CartItem> GioHang = Context.Session.Get<List<CartItem>>("GioHang");
@@ -314,13 +295,12 @@
                                 dem = dem + item.SoLuong;
                             }
                             <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a asp-action="index" asp-controller="GioHang" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>@dem sản phẩm</span></a></div>
-
-
                         }
                         else
                         {
                             <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a asp-action="index" asp-controller="GioHang" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>0 sản phẩm</span></a></div>
                         }
+
                     </div>
                 </div>
             </div>
