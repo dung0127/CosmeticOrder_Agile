@@ -15,6 +15,7 @@ namespace Cosmetic.Controllers
             return View();
         }
 
+        [Route("hoi-dap")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -22,6 +23,7 @@ namespace Cosmetic.Controllers
             return View();
         }
 
+        [Route("lien-he")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
