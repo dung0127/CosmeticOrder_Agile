@@ -98,7 +98,7 @@ using Cosmetic.Models;
             WriteLiteral("                   <div class=\"card-body\">\r\n                        <ul class=\"nav nav-pills flex-column\">\r\n                            <li>");
             EndContext();
             BeginContext(1207, 127, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "de42404ade7941fe96d2b4bc6c4e871e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0152029926584c6dbeaab002e2d48475", async() => {
                 BeginContext(1277, 53, true);
                 WriteLiteral("<i class=\"fa fa-phone\" aria-hidden=\"true\"></i>Liên hệ");
                 EndContext();
@@ -123,7 +123,7 @@ using Cosmetic.Models;
             WriteLiteral("</li>\r\n                            <li>");
             EndContext();
             BeginContext(1373, 132, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "038c3432bca14b2180a9a8b5c865b1df", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "30d2c80cfd194e42ba60b1ce45d759da", async() => {
                 BeginContext(1434, 67, true);
                 WriteLiteral("<i class=\"fa fa-question\" aria-hidden=\"true\"></i>Câu hỏi thường gặp");
                 EndContext();
@@ -148,7 +148,7 @@ using Cosmetic.Models;
             WriteLiteral("</li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n                <!-- *** PAGES MENU END ***-->\r\n                <div class=\"banner\"><a href=\"#\">");
             EndContext();
             BeginContext(1691, 70, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "5615c945284b4a7986005a023ce75565", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "df72d68a8882455f814a4c05f1731087", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -205,7 +205,7 @@ using Cosmetic.Models;
                     ");
             EndContext();
             BeginContext(4086, 2255, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bf5363db91bc40f4b45669992b4706ec", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f6581473b24e4f3c86789d5a5173dc57", async() => {
                 BeginContext(4134, 2200, true);
                 WriteLiteral(@"
                         <div class=""row"">

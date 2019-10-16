@@ -68,7 +68,7 @@ using Cosmetic.Models;
             WriteLiteral("<div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n        <h1 class=\"page-header\">Sản phẩm</h1>\r\n    </div>\r\n    <!-- /.col-lg-12 -->\r\n</div>\r\n<!-- /.row -->\r\n<div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n        <p>\r\n            ");
             EndContext();
             BeginContext(375, 35, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "68fc0281809d40d79b736df01c62742e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c018198465e4b339b0f6b178b53fd60", async() => {
                 BeginContext(398, 8, true);
                 WriteLiteral("Thêm mới");
                 EndContext();
@@ -240,7 +240,7 @@ using Cosmetic.Models;
             WriteLiteral("</td>\r\n                                <td>");
             EndContext();
             BeginContext(2214, 74, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6e886e1fee3449a09096f6296623426f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "63d223044e8c4813925bad5430d49c2b", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -266,7 +266,7 @@ AddHtmlAttributeValue("", 2274, item.Hinh, 2274, 10, false);
             WriteLiteral("</td>\r\n                                <td>");
             EndContext();
             BeginContext(2331, 75, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1be3b822fc5247b0923d3c98cc1ce3da", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "70a03f647325414eb8b5c432e8a003bc", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -302,7 +302,7 @@ AddHtmlAttributeValue("", 2391, item.Hinh2, 2391, 11, false);
             WriteLiteral("</td>\r\n                                <td>");
             EndContext();
             BeginContext(2533, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1524fd61bde14566b9436bf55b722e7f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f356958815224a0988693de0b3aa2863", async() => {
                 BeginContext(2580, 8, true);
                 WriteLiteral("Cập nhật");
                 EndContext();
@@ -337,7 +337,7 @@ AddHtmlAttributeValue("", 2391, item.Hinh2, 2391, 11, false);
             WriteLiteral("</td>\r\n                                <td>");
             EndContext();
             BeginContext(2635, 56, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "27905a9da8a44634992a0a6ae02c0e3a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d75dd11442674a018e74e6bbbd4423e1", async() => {
                 BeginContext(2684, 3, true);
                 WriteLiteral("Xóa");
                 EndContext();

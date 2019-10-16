@@ -38,9 +38,21 @@ namespace Cosmetic.Controllers
         [Route("[controller]/[action]")]
         public IActionResult DangKy()
         {
-            return View("DangKy");
+            return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult>DangKy([Bind("MaKh,MatKhau,HoTen,GioiTinh,NgaySinh,DiaChi,DienThoai,Email,HieuLuc,VaiTro,RandomKey")] KhachHang khachHang)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(khachHang);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(khachHang);
+        }
         [Route("[controller]/[action]")]
         public IActionResult DangXuat()
         {
