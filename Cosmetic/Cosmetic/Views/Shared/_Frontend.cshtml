@@ -108,9 +108,16 @@
                     <div class="col-lg-6 offer mb-3 mb-lg-0"><span id="dongHo"></span>&nbsp;<a href="#" class="btn btn-success btn-sm">Flash sale</a><a href="#" class="ml-1">giảm ngay 35% toàn bộ sản phẩm</a></div>
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
-                            
-                            <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
-                            
+                            @if (Context.Session.Get<KhachHang>("TaiKhoan") != null)
+                            {
+                                KhachHang khach = Context.Session.Get<KhachHang>("TaiKhoan");
+                                <li class="list-inline-item"><a asp-controller="KhachHang">Xin chào @khach.HoTen !</a></li>
+                                <li class="list-inline-item"><a asp-action="DangXuat" asp-controller="DangNhap">Đăng xuất</a></li>
+                            }
+                            else
+                            {
+                                <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                            }
                             <li class="list-inline-item"><a asp-action="../KhachHangs/AddnewKhachhang">Thêm mới</a></li>
                             <li class="list-inline-item"><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
                         </ul>
