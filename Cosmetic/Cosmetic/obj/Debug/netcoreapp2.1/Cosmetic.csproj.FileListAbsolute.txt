@@ -373,3 +373,6 @@ C:\Users\vi\Documents\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\net
 C:\Users\vi\Documents\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Cosmetic.csproj.CopyComplete
 C:\Users\vi\Documents\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Cosmetic.csprojAssemblyReference.cache
 C:\Users\vi\Documents\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\DangNhap\DangKy.g.cshtml.cs
+D:\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Cosmetic.csprojAssemblyReference.cache
+D:\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\DangNhap\DangKy.g.cshtml.cs
+D:\GitHub\CosmeticOrder_Agile\Cosmetic\Cosmetic\obj\Debug\netcoreapp2.1\Razor\Views\YeuThich\Index.g.cshtml.cs
