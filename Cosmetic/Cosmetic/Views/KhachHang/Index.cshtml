@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "KhachHang";
     Layout = "~/Views/Shared/_Frontend.cshtml";
+    KhachHang kh = Context.Session.Get<KhachHang>("TaiKhoan");
 }
 
 <div id="content">
@@ -38,16 +39,18 @@
                     <p class="text-muted"></p>
 
                     <h3>Thay đổi mật khẩu</h3>
-                    <form asp-action="DoiMK" asp-controller="KhachHang">
+                    <form asp-action="DoiMK" asp-controller="KhachHang" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="password_old">Tài khoản</label>
+                                    <input name="taikhoan" value="@kh.MaKh" type="text" class="form-control"  disabled>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="password_old">Mật khẩu</label>
+                                    <label for="password_old">Mật khẩu cũ</label>
+                                    <input name="nhapmkcu" type="password" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -70,24 +73,34 @@
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Thay đổi mật khẩu</button>
                         </div>
+                        <p style="font-style:italic; color:deeppink">@ViewBag.Result                            
+                        </p>
                     </form>
+                    
                     <h3 class="mt-5">Thông tin khách hàng</h3>
-                    <form asp-action="DoiTT" asp-controller="KhachHang">
+                    <form asp-action="DoiTT" asp-controller="KhachHang" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
 
                                     <label for="firstname">Họ tên</label>
-                                    <input name="hoten" value="" type="text" class="form-control">
+                                    <input name="hoten" value="@kh.HoTen" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="lastname">Giới tính</label>
                                     <select id="state" class="form-control">
-
-                                        <option name="gioi" value="True">Nam</option>
-                                        <option name="gioi" value="False" selected="selected">Nữ</option>
+                                        @if (kh.GioiTinh == false)
+                                        {
+                                            <option name="gioi" value="True">Nam</option>
+                                            <option name="gioi" value="False" selected="selected">Nữ</option>
+                                        }
+                                        @if (kh.GioiTinh == true)
+                                        {
+                                            <option name="gioi" value="True" selected="selected">Nam</option>
+                                            <option name="gioi" value="False">Nữ</option>
+                                        }
 
                                     </select>
                                 </div>
@@ -98,13 +111,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="company">Địa Chỉ</label>
-                                    <input name="diachi" value="" type="text" class="form-control">
+                                    <input name="diachi" value="@kh.DiaChi" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="street">Ngày sinh</label>
-                                    <input name="ngaysinh" value="" type="text" class="form-control">
+                                    <input name="ngaysinh" value="@kh.NgaySinh" type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -113,13 +126,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
-                                    <input name="sdt" value="" type="text" class="form-control">
+                                    <input name="sdt" value="@kh.DienThoai" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input name="email" value="" type="text" class="form-control">
+                                    <input name="email" value="@kh.Email" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-12 text-center">
