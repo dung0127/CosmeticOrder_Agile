@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cosmetic.Models;
 using Microsoft.AspNetCore.Mvc;
+using Cosmetic.Encrytions;
 
 namespace Cosmetic.Controllers
 {
@@ -21,9 +22,12 @@ namespace Cosmetic.Controllers
         [Route("[controller]/[action]")]
         public IActionResult DangNhap(LoginViewModel model)
         {
+            string key = "Cyg-X1"; //key to encrypt and decrypt
+            Encrytion ecr = new Encrytion();
+
             if (ModelState.IsValid)
             {
-                KhachHang kh = db.KhachHang.SingleOrDefault(p => p.MaKh == model.MaKh && p.MatKhau == model.MatKhau);
+                KhachHang kh = db.KhachHang.SingleOrDefault(p => p.MaKh == model.MaKh && ecr.DecryptText(p.MatKhau,key) == model.MatKhau);
                 if (kh == null)
                 {
                     ModelState.AddModelError("Loi", "Thông tin tài khoản hoặc mật khẩu không hợp lệ.");

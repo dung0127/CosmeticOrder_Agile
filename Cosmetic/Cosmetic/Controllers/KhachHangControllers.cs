@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Cosmetic.Models;
 using Microsoft.AspNetCore.DataProtection;
+using Cosmetic.Encrytions;
+
 namespace Cosmetic.Controllers
 {
     public class KhachHangController : Controller
@@ -26,12 +28,14 @@ namespace Cosmetic.Controllers
         public IActionResult DoiMK()
         {
             KhachHang kh = HttpContext.Session.Get<KhachHang>("TaiKhoan");
-            
+            string key = "Cyg-X1"; //key to encrypt and decrypt
+            Encrytion ecr = new Encrytion();  
+                       
             string passold = HttpContext.Request.Form["nhapmkcu"].ToString();
             string pass1 = HttpContext.Request.Form["nhapmk"].ToString();
             string pass2 = HttpContext.Request.Form["nhaplaimk"].ToString();            
             
-            if(pass1 != pass2 || passold != kh.MatKhau)
+            if(pass1 != pass2 || passold != ecr.DecryptText(kh.MatKhau,key))
             {
                 ViewBag.Result = "Mật khẩu không khớp!";
             }
@@ -43,7 +47,7 @@ namespace Cosmetic.Controllers
 
                 foreach (KhachHang ds in query)
                 {
-                    ds.MatKhau = pass2;
+                    ds.MatKhau = ecr.EncryptText(pass2,key);
                     ViewBag.Result = "Đã đổi mật khẩu thành công!";
                 }
                 try
