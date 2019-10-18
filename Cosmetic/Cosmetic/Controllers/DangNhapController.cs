@@ -11,6 +11,8 @@ namespace Cosmetic.Controllers
     public class DangNhapController : Controller
     {
         private readonly MyPhamContext db;
+        private string key = "Cyg-X1"; //key to encrypt and decrypt
+        Encrytion ecr = new Encrytion();
         public DangNhapController(MyPhamContext context)
         {
             db = context;
@@ -22,9 +24,7 @@ namespace Cosmetic.Controllers
         [Route("[controller]/[action]")]
         public IActionResult DangNhap(LoginViewModel model)
         {
-            string key = "Cyg-X1"; //key to encrypt and decrypt
-            Encrytion ecr = new Encrytion();
-
+            
             if (ModelState.IsValid)
             {
                 KhachHang kh = db.KhachHang.SingleOrDefault(p => p.MaKh == model.MaKh && ecr.DecryptText(p.MatKhau,key) == model.MatKhau);
@@ -51,7 +51,8 @@ namespace Cosmetic.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(khachHang);
+                khachHang.MatKhau = ecr.EncryptText(khachHang.MatKhau,key);
+                db.Add(khachHang);                
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
