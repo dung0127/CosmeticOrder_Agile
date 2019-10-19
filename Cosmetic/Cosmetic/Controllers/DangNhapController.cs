@@ -12,7 +12,7 @@ namespace Cosmetic.Controllers
     {
         private readonly MyPhamContext db;
         private string key = "Cyg-X1"; //key to encrypt and decrypt
-        Encrytion ecr = new Encrytion();
+        PasswordHasher passwordHasher = new PasswordHasher();
         public DangNhapController(MyPhamContext context)
         {
             db = context;
@@ -24,10 +24,10 @@ namespace Cosmetic.Controllers
         [Route("[controller]/[action]")]
         public IActionResult DangNhap(LoginViewModel model)
         {
-            
             if (ModelState.IsValid)
             {
-                KhachHang kh = db.KhachHang.SingleOrDefault(p => p.MaKh == model.MaKh && ecr.DecryptText(p.MatKhau,key) == model.MatKhau);
+                KhachHang kh = db.KhachHang.SingleOrDefault(p => p.MaKh == model.MaKh && 
+                passwordHasher.VerifyHashedPassword(p.MatKhau, model.MatKhau) == PasswordVerificationResult.Success);
                 if (kh == null)
                 {
                     ModelState.AddModelError("Loi", "Thông tin tài khoản hoặc mật khẩu không hợp lệ.");
@@ -51,7 +51,7 @@ namespace Cosmetic.Controllers
         {
             if (ModelState.IsValid)
             {
-                khachHang.MatKhau = ecr.EncryptText(khachHang.MatKhau,key);
+                khachHang.MatKhau = passwordHasher.HashPassword(khachHang.MatKhau);
                 db.Add(khachHang);                
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");

@@ -13,7 +13,9 @@ namespace Cosmetic.Controllers
     public class KhachHangController : Controller
     {
         private readonly MyPhamContext db;
+        Encrytion ecr = new Encrytion();
         private IDataProtector _protector;
+        //private string key = "Cyg-X1"; //key to encrypt and decrypt
         public KhachHangController(MyPhamContext context, IDataProtectionProvider provider)
         {
             _protector = provider.CreateProtector("Contoso.MyClass.v1");
@@ -28,16 +30,20 @@ namespace Cosmetic.Controllers
         public IActionResult DoiMK()
         {
             KhachHang kh = HttpContext.Session.Get<KhachHang>("TaiKhoan");
-            string key = "Cyg-X1"; //key to encrypt and decrypt
-            Encrytion ecr = new Encrytion();  
+            PasswordHasher passwordHasher = new PasswordHasher(); 
                        
             string passold = HttpContext.Request.Form["nhapmkcu"].ToString();
             string pass1 = HttpContext.Request.Form["nhapmk"].ToString();
             string pass2 = HttpContext.Request.Form["nhaplaimk"].ToString();            
             
-            if(pass1 != pass2 || passold != ecr.DecryptText(kh.MatKhau,key))
+            if(pass1 != pass2 || 
+            passwordHasher.VerifyHashedPassword(kh.MatKhau, passold) == PasswordVerificationResult.Failed)
             {
                 ViewBag.Result = "Mật khẩu không khớp!";
+            }
+            else if (passwordHasher.VerifyHashedPassword(kh.MatKhau, passold) == PasswordVerificationResult.ErrorNull)
+            {
+                ViewBag.Result = "Không được để trống mật khẩu!";
             }
             else
             {
@@ -47,19 +53,19 @@ namespace Cosmetic.Controllers
 
                 foreach (KhachHang ds in query)
                 {
-                    ds.MatKhau = ecr.EncryptText(pass2,key);
+                    ds.MatKhau = passwordHasher.HashPassword(pass2);
+                    kh.MatKhau = ds.MatKhau;
                     ViewBag.Result = "Đã đổi mật khẩu thành công!";
+                    HttpContext.Session.Set("TaiKhoan", kh);
                 }
                 try
                 {
                     db.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    ViewBag.Result = "Có lỗi xảy ra" + e;
+                    ViewBag.Result = "Có lỗi xảy ra. Vui lòng liên hệ admin";
                 }
-                kh.MatKhau = pass1;
-                HttpContext.Session.Set("TaiKhoan", kh);
             }
             return View("Index");
         }
