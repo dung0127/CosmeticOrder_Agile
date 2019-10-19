@@ -225,7 +225,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[KhachHang](
 	[MaKH] [nvarchar](50) NOT NULL,
-	[MatKhau] [nvarchar](50) NULL,
+	[MatKhau] [nvarchar](100) NULL,
 	[HoTen] [nvarchar](50) NULL,
 	[GioiTinh] [bit] NULL,
 	[NgaySinh] [date] NULL,
