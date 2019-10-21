@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cosmetic.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 using Cosmetic.Encrytions;
 
 namespace Cosmetic.Controllers
@@ -11,8 +12,9 @@ namespace Cosmetic.Controllers
     public class DangNhapController : Controller
     {
         private readonly MyPhamContext db;
-        private string key = "Cyg-X1"; //key to encrypt and decrypt
+        //private string key = "Cyg-X1"; //key to encrypt and decrypt
         PasswordHasher passwordHasher = new PasswordHasher();
+        //Encrytion ecr = new Encrytion(); // Encrypt HoTen, DiaChi, DienThoai, Email 
         public DangNhapController(MyPhamContext context)
         {
             db = context;
@@ -49,12 +51,42 @@ namespace Cosmetic.Controllers
         [Route("[controller]/[action]")]
         public async Task<IActionResult>DangKy([Bind("MaKh,MatKhau,HoTen,GioiTinh,NgaySinh,DiaChi,DienThoai,Email,HieuLuc,VaiTro,RandomKey")] KhachHang khachHang)
         {
-            if (ModelState.IsValid)
+            try 
             {
-                khachHang.MatKhau = passwordHasher.HashPassword(khachHang.MatKhau);
-                db.Add(khachHang);                
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                if (ModelState.IsValid)
+                {
+                    if (passwordHasher.HashPassword(khachHang.MatKhau) == "IVP")
+                    {
+                        throw new UserDefException("Mật khẩu đã đặt không hợp lệ!");
+                    }
+                    if (!Regex.IsMatch(khachHang.DienThoai, @"0(3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})", RegexOptions.IgnoreCase))
+                    {
+                        throw new UserDefException("Số điện thoại không hợp lệ!");
+                    }
+                    if (!Regex.IsMatch(khachHang.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase))
+                    {
+                        throw new UserDefException("Email không hợp lệ!");
+                    }
+                    else
+                    {
+                        khachHang.MatKhau = passwordHasher.HashPassword(khachHang.MatKhau);
+                        /*khachHang.HoTen = ecr.EncryptString(khachHang.HoTen, key);
+                        khachHang.DiaChi = ecr.EncryptString(khachHang.DiaChi, key);
+                        khachHang.DienThoai = ecr.EncryptString(khachHang.DienThoai, key);
+                        khachHang.Email = ecr.EncryptString(khachHang.Email, key);*/
+                        db.Add(khachHang);                
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            catch (UserDefException e)
+            {
+                ViewBag.Result = e.Message;
+            }
+            catch (Exception e)
+            {
+                ViewBag.Result = e.Message;
             }
             return View(khachHang);
         }

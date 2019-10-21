@@ -1,14 +1,24 @@
-//You can see more at: 
-// https://www.codeproject.com/Articles/769741/Csharp-AES-bits-Encryption-Library-with-Salt
+// To store a password of user, you shouldn't use Encryption because if someone has the key
+// they can Decrypt it easily. 
+// Read more: What is The Difference Between Hashing and Encrypting 
+// https://www.securityinnovationeurope.com/blog/page/whats-the-difference-between-hashing-and-encrypting
+// Encryption is a two-way function; what is encrypted can be decrypted with the proper key. 
+// Hashing, however, is a one-way function that scrambles plain text to produce a unique message digest.
 
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text;
 using System;
+
 namespace Cosmetic.Encrytions
 {
     public class Encrytion
     {
+        // Read more: C# AES 256 bits Encryption Library with Salt
+        // https://www.codeproject.com/Articles/769741/Csharp-AES-bits-Encryption-Library-with-Salt
+        
+        // Encryption
         public byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {
             byte[] encryptedBytes = null;
@@ -41,6 +51,7 @@ namespace Cosmetic.Encrytions
             return encryptedBytes;
         }
 
+        // Decryption
         public byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
         {
             byte[] decryptedBytes = null;
@@ -73,7 +84,11 @@ namespace Cosmetic.Encrytions
 
             return decryptedBytes;
         }
-        //password is key, input is password of user
+
+        // Example of Encrypting String
+
+        // Encrypt String
+        // password is key, input is information to encrypt
         public string EncryptText(string input, string password)
         {
             // Get the bytes of the string
@@ -89,7 +104,9 @@ namespace Cosmetic.Encrytions
 
             return result;
         }
-        //password is key, input is password of user
+
+        // Decrypt String
+        // password is key, input is information to encrypt
         public string DecryptText(string input, string password)
         {
             // Get the bytes of the string
@@ -103,10 +120,13 @@ namespace Cosmetic.Encrytions
 
             return result;
         }
+        //Example of Encrypting File
+
+        //Encrypt File
         public void EncryptFile()
         {
             string file = "C:\\SampleFile.DLL";
-            string password = "abcd1234";
+            string password = "abcd1234"; //this is key
 
             byte[] bytesToBeEncrypted = File.ReadAllBytes(file);
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -120,10 +140,11 @@ namespace Cosmetic.Encrytions
 
             File.WriteAllBytes(fileEncrypted, bytesEncrypted);
         }
+        // Decrypt File
         public void DecryptFile()
         {
             string fileEncrypted = "C:\\SampleFileEncrypted.DLL";
-            string password = "abcd1234";
+            string password = "abcd1234"; //this is key
 
             byte[] bytesToBeDecrypted = File.ReadAllBytes(fileEncrypted);
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -134,6 +155,10 @@ namespace Cosmetic.Encrytions
             string file = "C:\\SampleFile.DLL";
             File.WriteAllBytes(file, bytesDecrypted);
         }
+
+        // Getting Randomized Encryption Result with Salt
+
+        // Example of Appending Randomized Salt Before Encrypting a String
         public string EncryptString(string text, string password)
         {
             byte[] baPwd = Encoding.UTF8.GetBytes(password);
@@ -157,6 +182,8 @@ namespace Cosmetic.Encrytions
             string result = Convert.ToBase64String(baEncrypted);
             return result;
         }
+
+        // Example of Removing the Salt after Decryption
         public string DecryptString(string text, string password)
         {
             byte[] baPwd = Encoding.UTF8.GetBytes(password);
@@ -177,6 +204,8 @@ namespace Cosmetic.Encrytions
             string result = Encoding.UTF8.GetString(baResult);
             return result;
         }
+
+        // Code for getting random bytes
         public static byte[] GetRandomBytes()
         {
             int saltLength = GetSaltLength();
@@ -191,6 +220,11 @@ namespace Cosmetic.Encrytions
         }
         
     }
+///////////////////////////////////////////////////////////////////////////////////////////
+    //Read more: https://www.meziantou.net/how-to-store-a-password-in-a-web-application.htm
+    // This is using specialized hashing algorithms PBKDF2 in C#
+    // HASH này sẽ gây lỗi sai mật khẩu khi dùng toàn là dấu cách "    "
+    // Kiểm tra loại trừ trường hợp này 
     public sealed class PasswordHasher
     {
         public byte Version => 1;
@@ -198,11 +232,13 @@ namespace Cosmetic.Encrytions
         public int Pbkdf2SubkeyLength { get; } = 256 / 8; // 256 bits
         public int SaltSize { get; } = 128 / 8; // 128 bits
         public HashAlgorithmName HashAlgorithmName { get; } = HashAlgorithmName.SHA256;
-
+        
+        // Use to Hash the password
         public string HashPassword(string password)
         {
             if (password == null)
-                throw new ArgumentNullException(nameof(password));
+                //throw new ArgumentNullException(nameof(password));
+                return "IVP"; //Invalid Password!
 
             byte[] salt;
             byte[] bytes;
@@ -219,7 +255,7 @@ namespace Cosmetic.Encrytions
 
             return Convert.ToBase64String(inArray);
         }
-
+        // Use to check match password: hashedPassword from database, password from user input
         public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string password)
         {
             if (password == null)
@@ -255,7 +291,7 @@ namespace Cosmetic.Encrytions
 
         // In .NET Core 2.1, you can use CryptographicOperations.FixedTimeEquals
         // https://github.com/dotnet/corefx/blob/a10890f4ffe0fadf090c922578ba0e606ebdd16c/src/System.Security.Cryptography.Primitives/src/System/Security/Cryptography/CryptographicOperations.cs#L32
-        //[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static bool FixedTimeEquals(byte[] left, byte[] right)
         {
             // NoOptimization because we want this method to be exactly as non-short-circuiting as written.
@@ -276,12 +312,11 @@ namespace Cosmetic.Encrytions
             return accum == 0;
         }
     }
-
     public enum PasswordVerificationResult
     {
-        ErrorNull,
-        Failed,
-        Success,
+        ErrorNull, //Lỗi null mật khẩu
+        Failed, // Sai mật khẩu
+        Success, // Đúng mật khẩu
         SuccessRehashNeeded,
     }
 }

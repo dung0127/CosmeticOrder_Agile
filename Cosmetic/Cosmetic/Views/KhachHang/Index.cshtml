@@ -90,13 +90,13 @@
                             <div class="col-md-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="lastname">Giới tính</label>
-                                    <select id="state" class="form-control">
+                                    <select name="gioi" id="state" class="form-control">
                                         @if (kh.GioiTinh == false)
                                         {
                                             <option name="gioi" value="True">Nam</option>
                                             <option name="gioi" value="False" selected="selected">Nữ</option>
                                         }
-                                        @if (kh.GioiTinh == true)
+                                        else
                                         {
                                             <option name="gioi" value="True" selected="selected">Nam</option>
                                             <option name="gioi" value="False">Nữ</option>
@@ -117,7 +117,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="street">Ngày sinh</label>
-                                    <input name="ngaysinh" value="@kh.NgaySinh" type="text" class="form-control">
+                                    <input name="ngaysinh" value='@Convert.ToDateTime(kh.NgaySinh).ToString("yyyy-MM-dd")'; type="date" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -138,6 +138,8 @@
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Thay đổi thông tin</button>
                             </div>
+                            <p style="font-style:italic; color:deeppink">@ViewBag.Result2
+                            </p>
                         </div>
                     </form>
 
