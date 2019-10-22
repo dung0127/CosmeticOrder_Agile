@@ -84,7 +84,45 @@ namespace Cosmetic.Controllers
             return RedirectToAction("ThanhToan1", "ThanhToan");
         }
 
-      
+        [Route("[controller]/[action]")]
+        public IActionResult DatHang(string makh, string hotenkh, string diachikh, string sdt, string tennhan, string sdtnhan, string diachinhan, string ghichunhan)
+        {
+            HoaDon hd = new HoaDon
+            {
+                MaKh = makh,
+                HoTen = hotenkh,
+                DiaChi = diachikh,
+                DienThoai = sdt,
+                TenNgNhan = tennhan,
+                DtngNhan = sdtnhan,
+                DiaChiNgNhan = diachinhan,
+                GhiChu = ghichunhan,
+                NgayDat = DateTime.Now,
+                MaTrangThai = 0,
+                PhiVanChuyen = 0
+            };
+            db.HoaDon.Add(hd);
+
+            foreach (var item in Carts)
+            {
+                SanPham hh = db.SanPham.SingleOrDefault(p => p.MaSp == item.MaHh);
+                //Lưu chi tiết hóa đơn
+                ChiTietHd cthd = new ChiTietHd
+                {
+                    MaHd = hd.MaHd,
+                    MaSp = item.MaHh,
+                    DonGia = hh.DonGia,
+                    SoLuong = item.SoLuong,
+                };
+                db.ChiTietHd.Add(cthd);
+                db.SaveChanges();
+            }
+
+            HttpContext.Session.Remove("GioHang");
+            HttpContext.Session.Remove("ThongTin");
+            return RedirectToAction("ThanhToan1");
+
+        }
 
     }
 }
