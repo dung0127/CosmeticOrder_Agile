@@ -1,4 +1,4 @@
-﻿
+﻿@model Cosmetic.Models.RestoreAccount
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Frontend.cshtml";
@@ -19,13 +19,18 @@
 
             <div class="col-lg-9" style="width:800px; margin:0 auto;">
                 <div class="box">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="text-success">
+                            <p><strong>Thành công!</strong> @TempData["Success"].ToString()</p>
+                        </div>
+                    }
                     <h1 style="text-align:center">Reset password </h1>
-                    <p class="text-muted">Vui lòng nhập địa chỉ email tài khoản của bạn vào ô bên dưới. Bạn sẽ nhận được một liên kết để thiết lập lại mật khẩu.</p>
-                    <form asp-action="DangNhap">
+                    <p class="text-muted">Vui lòng nhập địa chỉ email vào ô bên dưới. Bạn sẽ nhận được một mật khẩu ngẫu nhiên để đăng nhập vào tài khoản.</p>
+                    <form method="post" asp-controller="RestoreAccount" asp-action="Forget">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group">
-                            <label>Email tài khoản của bạn</label>
-                            <input id="email" type="text" class="form-control" required>
+                            <input asp-for="UserEmail" type="email" placeholder="Địa chỉ email" class="form-control" required>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-mail-forward"></i>Gửi đi</button>
