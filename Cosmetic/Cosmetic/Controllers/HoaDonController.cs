@@ -7,6 +7,7 @@ using Cosmetic.Models;
 
 namespace Cosmetic.Controllers
 {
+
     public class HoaDonController : Controller
     {
         private readonly MyPhamContext db;
