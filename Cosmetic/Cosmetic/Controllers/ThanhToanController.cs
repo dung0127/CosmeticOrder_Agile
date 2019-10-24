@@ -84,6 +84,8 @@ namespace Cosmetic.Controllers
             return RedirectToAction("ThanhToan1", "ThanhToan");
         }
 
+        //Lưu hóa đơn đặt hàng
+
         [Route("[controller]/[action]")]
         public IActionResult DatHang(string makh, string hotenkh, string diachikh, string sdt, string tennhan, string sdtnhan, string diachinhan, string ghichunhan)
         {
@@ -116,6 +118,23 @@ namespace Cosmetic.Controllers
                 };
                 db.ChiTietHd.Add(cthd);
                 db.SaveChanges();
+
+                //Kiểm tra hàng tồn kho
+                KhoHang kho = db.KhoHang.SingleOrDefault(p => p.MaSp == cthd.MaSp);
+                if (kho.SoLuong >= cthd.SoLuong)
+                {
+                    kho.SoLuong = kho.SoLuong - cthd.SoLuong;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    SanPham sp = db.SanPham.SingleOrDefault(p => p.MaSp == cthd.MaSp);
+
+                    db.ChiTietHd.Remove(cthd);
+                    db.HoaDon.Remove(hd);
+                    db.SaveChanges();
+                    return RedirectToAction("ThanhToan1");
+                }
             }
 
             HttpContext.Session.Remove("GioHang");
