@@ -1,4 +1,13 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string loai = "Sản phẩm hot";
+    if (ViewBag.Loai != null)
+    {
+        loai = (ViewBag.Loai as Loai).TenLoai;
+    }
+    string loai1 = "Hàng mới về ";
+}
+@model IEnumerable<Cosmetic.Models.SanPham>
 <div id="content">
     <div class="container">
         <div class="row">
@@ -64,29 +73,35 @@
                 </div>
             </div>
         </div>
-
+        @{
+            MyPhamContext db = new MyPhamContext();
+            var dsSP = db.SanPham
+                .Where(p => p.SpHot.ToString() == "1")
+                .ToList();
+        }
         <div class="container">
             <div class="product-slider owl-carousel owl-theme test">
-
-                <div class="item" style="width:210px; height:330px">
-                    <div class="product">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front"><a><img src="~/Hinh/beauty/son13.jpg" class="img-fluid"></a></div>
-                                <div class="back"><a><img src="~/Hinh/beauty/son13.jpg" mg-fluid"></a></div>
+                @foreach (var item in dsSP)
+                {
+                    <div class="item" style="width:210px; height:330px">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
+                                    <div class="back"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()"><img src="~/Hinh/beauty/@item.Hinh2" alt="" class="img-fluid"></a></div>
+                                </div>
+                            </div><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai1.ToUrlFriendly()" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                            <div class="text">
+                                <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai1.ToUrlFriendly()">@item.TenSp</a></h3>
+                                <p class="price">
+                                    <del>@item.GiaCu.Value.ToString("#,##0") đ</del> @item.DonGia.Value.ToString("#,##0") đ
+                                </p>
                             </div>
-                        </div><a class="invisible"><img src="~/Hinh/beauty/son13.jpg" alt="" class="img-fluid"></a>
-                        <div class="text">
-                            <h3><a> </a></h3>
-                            <p class="price">
-                                <del>90000</del> 900000 đ
-                            </p>
+                            <!-- /.text-->
                         </div>
-                        <!-- /.text-->
+                        <!-- /.product-->
                     </div>
-                    <!-- /.product-->
-                </div>
-
+                }
                 <!-- /.container-->
             </div>
             <!-- /#hot-->
