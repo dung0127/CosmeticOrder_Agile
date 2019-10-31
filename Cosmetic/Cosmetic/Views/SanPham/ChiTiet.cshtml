@@ -252,7 +252,57 @@
                         <hr>
                         <div class="sharethis-inline-share-buttons"></div>
                     </div>
+                    @{
 
+                        MyPhamContext db1 = new MyPhamContext();
+                        var dsbl = db1.BinhLuan.Where(p => p.MaSp == Model.MaSp).ToList();
+                        int dem = db1.BinhLuan.Where(p => p.MaSp == Model.MaSp).Count();
+
+                        if (dsbl.Count() > 0)
+                        {
+                            <div id="details" class="box">
+                                <h4><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;Đánh giá của khách hàng (@dem) </h4>
+                                <p>@Model.MoTa</p>
+                                <div class="scroll-rating">
+                                    @foreach (var item in dsbl)
+                                    {
+                                        <div class="nhanxet">
+                                            <p>
+                                                <a href="taikhoan.php"><b style="color: #084B8A; font-family: " Courier New", Courier, monospace">@item.HoTen&nbsp;</b></a>
+                                                <i class="posted" style="color:#a3a375; font-size:14px"><i class="fa fa-clock-o"></i>@item.NgayBl</i>
+                                            </p>
+                                            <p>@item.NoiDung</p>
+                                        </div>
+                                    }
+                                </div>
+                                <hr>
+                                <div class="social">
+                                    <h4>Chia sẻ</h4>
+                                    <p><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" class="email"><i class="fa fa-envelope"></i></a></p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="details" class="box">
+                                <h4><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;Đánh giá của khách hàng (0) </h4>
+                                <p>@Model.MoTa</p>
+                                <div class="scroll-rating">
+                                    <div class="nhanxet">
+                                        <p class="text-center" style="margin-top:120px">Chưa có nhận xét nào !</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="social">
+                                    <h4>Chia sẻ</h4>
+                                    <p><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" class="email"><i class="fa fa-envelope"></i></a></p>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
                 </div>
                 <!-- /.col-md-9-->
             </div>
