@@ -108,9 +108,9 @@
             <!-- *** HOT END ***-->
         </div>
         <!--
-        *** HÀNG MỚI***
-        _________________________________________________________
-        -->
+    *** HÀNG MỚI***
+    _________________________________________________________
+    -->
         <div class="box py-4">
             <div class="container">
                 <div class="row">
@@ -122,39 +122,46 @@
                 </div>
             </div>
         </div>
-
+        @{
+            MyPhamContext db1 = new MyPhamContext();
+            var dsma = db.SanPham.Count();
+            var ds = db.SanPham
+                .Where(p => (p.MaSp <= dsma && p.MaSp >= (dsma - 24)))
+                .ToList();
+        }
         <div class="container">
             <div class="product-slider owl-carousel owl-theme test">
-
-                <div class="item" style="width:210px; height:330px">
-                    <div class="product">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front"><a><img src="~/Hinh/beauty/son13.jpg" class="img-fluid"></a></div>
-                                <div class="back"><a><img src="~/Hinh/beauty/son13.jpg" class="img-fluid"></a></div>
+                @foreach (var item in ds)
+                {
+                    <div class="item" style="width:210px; height:330px">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai1.ToUrlFriendly()"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
+                                    <div class="back"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai1.ToUrlFriendly()"><img src="~/Hinh/beauty/@item.Hinh2" alt="" class="img-fluid"></a></div>
+                                </div>
+                            </div><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai1.ToUrlFriendly()" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                            <div class="text">
+                                <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai1.ToUrlFriendly()">@item.TenSp</a></h3>
+                                <p class="price">
+                                    <del>@item.GiaCu.Value.ToString("#,##0") đ</del> @item.DonGia.Value.ToString("#,##0") đ
+                                </p>
                             </div>
-                        </div><a class="invisible"><img src="~/Hinh/beauty/son13.jpg" alt="" class="img-fluid"></a>
-                        <div class="text">
-                            <h3><a>hihi</a></h3>
-                            <p class="price">
-                                <del>90000</del> 9000000 đ
-                            </p>
+                            <!-- /.text-->
                         </div>
-                        <!-- /.text-->
+                        <!-- /.product-->
                     </div>
-                    <!-- /.product-->
-                </div>
 
-
+                }
                 <!-- /.container-->
             </div>
             <!-- /#hot-->
             <!-- *** HOT END ***-->
         </div>
         <!--
-        **THƯƠNG HIỆU**
-        _________________________________________________________
-        -->
+    **THƯƠNG HIỆU**
+    _________________________________________________________
+    -->
         <div class="box py-4">
             <div class="container">
                 <div class="row">
@@ -190,9 +197,9 @@
             <!-- *** HOT END ***-->
         </div>
         <!--
-        *** GET INSPIRED ***
-        _________________________________________________________
-        -->
+    *** GET INSPIRED ***
+    _________________________________________________________
+    -->
         <div class="container">
             <div class="col-md-12">
                 <div class="box slideshow">
@@ -209,9 +216,9 @@
         </div>
         <!-- *** GET INSPIRED END ***-->
         <!--
-        *** BLOG HOMEPAGE ***
-        _________________________________________________________
-        -->
+    *** BLOG HOMEPAGE ***
+    _________________________________________________________
+    -->
         <div class="box text-center">
             <div class="container">
                 <div class="col-md-12">
@@ -224,31 +231,31 @@
             </div>
         </div>
         <!--<div class="container">
-            <div class="col-md-12">
-                <div id="blog-homepage" class="row">
-                    <div class="col-sm-6">
-                        <div class="post">
-                            <h4><a href="post.html">Fashion now</a></h4>
-                            <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p>
-                            <hr>
-                            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                            <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="post">
-                            <h4><a href="post.html">Who is who - example blog post</a></h4>
-                            <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a></p>
-                            <hr>
-                            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                            <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a></p>
-                        </div>
+        <div class="col-md-12">
+            <div id="blog-homepage" class="row">
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4><a href="post.html">Fashion now</a></h4>
+                        <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p>
+                        <hr>
+                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                        <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a></p>
                     </div>
                 </div>
-                /#blog-homepage
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4><a href="post.html">Who is who - example blog post</a></h4>
+                        <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a></p>
+                        <hr>
+                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                        <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a></p>
+                    </div>
+                </div>
             </div>
+            /#blog-homepage
         </div>
-        -->
+    </div>
+    -->
         <!-- /.container-->
         <!-- *** BLOG HOMEPAGE END ***-->
     </div>
