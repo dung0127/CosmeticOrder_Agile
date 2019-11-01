@@ -173,24 +173,30 @@
                 </div>
             </div>
         </div>
+        @{
+            MyPhamContext db2 = new MyPhamContext();
+            var dshieu = db.ThuongHieu
+                .Where(p => p.MaHieu <= 15)
+                .ToList();
 
-
+        }
         <div class="container">
             <div class="product-slider owl-carousel owl-theme test">
-
-                <div class="item" style="width:210px">
-                    <div class="product">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front"><a><img src="~/Hinh/beauty/son13.jpg" alt="" class="img-fluid"></a></div>
-                                <div class="back"><a><img src="~/Hinh/beauty/son13.jpg" alt="" class="img-fluid"></a></div>
-                            </div>
-                        </div><a class="invisible"><img src="~/Hinh/beauty/son13.jpg" alt="" class="img-fluid"></a>
-                        <!-- /.text-->
+                @foreach (var item in dshieu)
+                {
+                    <div class="item" style="width:210px">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front"><a asp-action="Hieu" asp-controller="SanPham" asp-route-hieuurl="@item.TenHieuSeoUrl"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
+                                    <div class="back"><a asp-action="Hieu" asp-controller="SanPham" asp-route-hieuurl="@item.TenHieuSeoUrl"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
+                                </div>
+                            </div><a asp-action="Hieu" asp-controller="SanPham" asp-route-hieuurl="@item.TenHieuSeoUrl" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                            <!-- /.text-->
+                        </div>
+                        <!-- /.product-->
                     </div>
-                    <!-- /.product-->
-                </div>
-
+                }
                 <!-- /.container-->
             </div>
             <!-- /#hot-->
