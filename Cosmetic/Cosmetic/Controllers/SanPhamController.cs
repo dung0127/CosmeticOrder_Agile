@@ -159,5 +159,24 @@ namespace Cosmetic.Controllers
                            }).ToList();
             return View(sanPham);
         }
+
+        [Route("[controller]/[action]")]
+        public IActionResult BinhLuan(string makh, int masp, string hoten, string email, string noidung)
+        {
+            BinhLuan bl = new BinhLuan
+            {
+                MaSp = masp,
+                MaKh = makh,
+                NgayBl = DateTime.Now,
+                HoTen = hoten,
+                Email = email,
+                NoiDung = noidung,
+
+            };
+            
+            db.BinhLuan.Add(bl);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
