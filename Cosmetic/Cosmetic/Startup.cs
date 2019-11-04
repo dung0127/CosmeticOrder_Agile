@@ -11,8 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 //using Services.PayPal;
 using Cosmetic.Models;
+using Cosmetic.GATagHelpers;
 
 namespace Cosmetic
 {
@@ -24,10 +26,17 @@ namespace Cosmetic
         }
 
         public IConfiguration Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            // Register the Google Analytics configuration
+            services.Configure<GoogleAnalyticsOptions>(options => Configuration.GetSection("GoogleAnalytics").Bind(options));
+
+            // Register the TagHelperComponent
+            services.AddTransient<ITagHelperComponent, GoogleAnalyticsTagHelperComponent>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
