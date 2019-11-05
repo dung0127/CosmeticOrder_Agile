@@ -12,14 +12,7 @@ namespace Cosmetic.Controllers
         [Route("[controller]/[action]")]
         public IActionResult Index()
         {
-            if (HttpContext.Session.Get<NhanVien>("MaNv") == null)
-            {
-                return Redirect("/Admin/Login");
-            }
-            else
-            {
                 return View();
-            }
         }
         private readonly MyPhamContext db;
         public AdminController(MyPhamContext context)
