@@ -259,7 +259,7 @@
                     @{
 
                         MyPhamContext db1 = new MyPhamContext();
-                        var dsbl = db1.BinhLuan.Where(p => p.MaSp == Model.MaSp).ToList();
+                        var dsbl = db1.BinhLuan.Where(p => p.MaSp == Model.MaSp).OrderByDescending(p => p.NgayBl).ToList();
                         int dem = db1.BinhLuan.Where(p => p.MaSp == Model.MaSp).Count();
 
                         if (dsbl.Count() > 0)
