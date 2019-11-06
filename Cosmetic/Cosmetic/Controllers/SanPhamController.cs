@@ -161,7 +161,7 @@ namespace Cosmetic.Controllers
         }
 
         [Route("[controller]/[action]")]
-        public IActionResult BinhLuan(string makh, int masp, string hoten, string email, string noidung)
+        public IActionResult BinhLuan(string makh, int masp, string hoten, string email, string noidung, string loais, string urls)
         {
             BinhLuan bl = new BinhLuan
             {
@@ -176,7 +176,7 @@ namespace Cosmetic.Controllers
             
             db.BinhLuan.Add(bl);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ChiTiet", "SanPham", new { url = urls, loai = loais });
         }
     }
 }
