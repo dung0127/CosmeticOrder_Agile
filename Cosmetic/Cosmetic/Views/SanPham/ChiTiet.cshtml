@@ -156,15 +156,15 @@
                                             KhachHang kh = Context.Session.Get<KhachHang>("TaiKhoan");
                                             <form asp-action="BinhLuan" asp-controller="SanPham" method='post'>
                                                 <div>
+                                                    <input type="hidden" name="urls" value="@Model.TenSpSeoUrl" class="form-control" />
+                                                    <input type="hidden" name="loais" value="@loai.ToUrlFriendly()" class="form-control" />
                                                     <input type="hidden" name="makh" value="@kh.MaKh" class="form-control" />
                                                     <input type="hidden" name="hoten" value="@kh.HoTen" class="form-control" />
                                                     <input type="hidden" name="email" value="@kh.Email" class="form-control" />
                                                     <input type="hidden" name="masp" value="@Model.MaSp" class="form-control" />
-                                                    <input type="hidden" name="urls" value="@Model.TenSpSeoUrl" class="form-control" />
-                                                    <input type="hidden" name="loais" value="@loai.ToUrlFriendly()" class="form-control" />
                                                     <textarea name="noidung" cols='48' rows='4' required> </textarea>
+                                                    <p class="text-right buttons"><input class="btn btn-primary" type='submit' name='danhgia' value='Đánh giá sản phẩm'></p>
                                                 </div>
-                                                <p class="text-right buttons"><input class="btn btn-primary" type='submit' name='danhgia' value='Đánh giá sản phẩm'></p>
                                             </form>
                                         }
                                         else
@@ -225,6 +225,8 @@
                                             KhachHang kh = Context.Session.Get<KhachHang>("TaiKhoan");
                                             <form asp-action="BinhLuan" asp-controller="SanPham" method='post'>
                                                 <div>
+                                                    <input type="hidden" name="urls" value="@Model.TenSpSeoUrl" class="form-control" />
+                                                    <input type="hidden" name="loais" value="@loai.ToUrlFriendly()" class="form-control" />
                                                     <input type="hidden" name="makh" value="@kh.MaKh" class="form-control" />
                                                     <input type="hidden" name="hoten" value="@kh.HoTen" class="form-control" />
                                                     <input type="hidden" name="email" value="@kh.Email" class="form-control" />
