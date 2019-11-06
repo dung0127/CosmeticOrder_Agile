@@ -184,9 +184,9 @@
                                                 <div class="front"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
                                                 <div class="back"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh2" alt="" class="img-fluid"></a></div>
                                             </div>
-                                        </div><a href="detail.html" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                                        </div><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
                                         <div class="text">
-                                            <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl">@item.TenSp</a></h3>
+                                            <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()">@item.TenSp</a></h3>
                                             <p class="price">
                                                 <del>@item.GiaCu.Value.ToString("#,##0") đ </del> @item.DonGia.Value.ToString("#,##0") đ
                                             </p>
@@ -210,9 +210,9 @@
                                                 <div class="front"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a></div>
                                                 <div class="back"><a href="/@loai.ToUrlFriendly()/@item.TenSpSeoUrl"><img src="~/Hinh/beauty/@item.Hinh2" alt="" class="img-fluid"></a></div>
                                             </div>
-                                        </div><a href="detail.html" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
+                                        </div><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()" class="invisible"><img src="~/Hinh/beauty/@item.Hinh" alt="" class="img-fluid"></a>
                                         <div class="text">
-                                            <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-id="@item.MaSp">@item.TenSp</a></h3>
+                                            <h3><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-url="@item.TenSpSeoUrl" asp-route-loai="@loai.ToUrlFriendly()">@item.TenSp</a></h3>
                                             <p class="price">
                                                 <del>@item.GiaCu.Value.ToString("#,##0") đ </del> @item.DonGia.Value.ToString("#,##0") đ
                                             </p>
